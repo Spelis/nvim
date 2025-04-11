@@ -1,4 +1,4 @@
-local fzf = require "telescope.builtin"
+local fzf = require("telescope.builtin")
 
 -- keybinds
 vim.keymap.set("n", ";", ":", { desc = "Run Command" })
@@ -12,6 +12,7 @@ vim.keymap.set("n", "<leader>qf", "<cmd>q!<CR>", { desc = "Force Quit" })
 vim.keymap.set("n", "<leader>qq", "<cmd>q<CR>", { desc = "Quit Nvim" })
 
 vim.keymap.set("n", "<leader>bn", "<cmd>ene <BAR> startinsert <CR>", { desc = "Create new file" })
+vim.keymap.set("n", "<leader>bd", "<cmd>Dashboard<CR>", { desc = "Go back to Dashboard" })
 
 vim.keymap.set("n", "<C-s>", "<cmd>w<CR>", { desc = "Save current buffer" })
 
@@ -21,6 +22,6 @@ vim.keymap.set("n", "<leader>lf", "gg", { desc = "Go to First Line" })
 
 vim.keymap.set("n", "<leader>ff", fzf.find_files, { desc = "Telescope Find Files" })
 vim.keymap.set("n", "<leader>fb", fzf.buffers, { desc = "Telescope Buffers" })
--- vim.keymap.set("n", "<leader>fr", fzf.old_files, { desc = "Telescope Recent Files" })
+vim.keymap.set("n", "<leader>fr", fzf.oldfiles, { desc = "Telescope Recent Files" })
 
 vim.keymap.set("n", "<leader>uq", 'ciw""<Esc>P', { desc = "Surround text in quotes" })
