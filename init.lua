@@ -18,7 +18,6 @@ require "settings.noconf"
 require "settings.symbols"
 require "settings.tabs"
 require "settings.dashboard"
-require "settings.telescope"
 
 -- whichKey setup
 local wk = require "which-key"
