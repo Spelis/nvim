@@ -16,3 +16,7 @@ lspconfig.pyright.setup {
 lspconfig.lua_ls.setup {
   capabilities = require("cmp_nvim_lsp").default_capabilities(),
 }
+
+lspconfig.marksman.setup {
+  capabilities = require("cmp_nvim_lsp").default_capabilities(),
+}

@@ -24,6 +24,8 @@ require "paq" {
   "stevearc/conform.nvim", -- formatting
   "simrat39/symbols-outline.nvim",
   "lewis6991/gitsigns.nvim",
+  "nvimdev/dashboard-nvim",
+  "nvim-telescope/telescope-media-files.nvim",
 }
 
 vim.cmd [[PaqInstall]] -- Install all packages
