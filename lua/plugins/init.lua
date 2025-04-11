@@ -26,6 +26,7 @@ require "paq" {
   "lewis6991/gitsigns.nvim",
   "nvimdev/dashboard-nvim",
   "nvim-telescope/telescope-media-files.nvim",
+  "andweeb/presence.nvim",
 }
 
 vim.cmd [[PaqInstall]] -- Install all packages
