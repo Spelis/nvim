@@ -27,6 +27,7 @@ require("paq")({
 	"nvimdev/dashboard-nvim",
 	"nvim-telescope/telescope-media-files.nvim",
 	"andweeb/presence.nvim",
+	"ahmedkhalf/project.nvim",
 })
 
 vim.cmd([[PaqInstall]]) -- Install all packages

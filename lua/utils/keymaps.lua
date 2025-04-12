@@ -23,5 +23,6 @@ vim.keymap.set("n", "<leader>lf", "gg", { desc = "Go to First Line" })
 vim.keymap.set("n", "<leader>ff", fzf.find_files, { desc = "Telescope Find Files" })
 vim.keymap.set("n", "<leader>fb", fzf.buffers, { desc = "Telescope Buffers" })
 vim.keymap.set("n", "<leader>fr", fzf.oldfiles, { desc = "Telescope Recent Files" })
+vim.keymap.set("n", "<leader>fp", "<cmd>Telescope projects<CR>")
 
 vim.keymap.set("n", "<leader>uq", 'ciw""<Esc>P', { desc = "Surround text in quotes" })

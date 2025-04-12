@@ -1,5 +1,4 @@
 local dashboard = require("dashboard")
-
 local conf = vim.api.nvim_exec('echo stdpath("config")', true) .. "/init.lua"
 
 -- Setup with centered layout
@@ -27,6 +26,7 @@ dashboard.setup({
 			{ icon = " ", desc = "Find file                  ", key = "ff", action = "Telescope find_files" },
 			{ icon = "󰚰 ", desc = "Recently used files        ", key = "fr", action = "Telescope oldfiles" },
 			{ icon = "󱎸 ", desc = "Find text                  ", key = "ft", action = "Telescope live_grep" },
+			{ icon = " ", desc = "Recent Projects            ", key = "p", action = "Telescope projects" },
 			{ icon = " ", desc = "Configuration              ", key = "c", action = "e " .. conf },
 			{ icon = "󰑓 ", desc = "Update                     ", key = "u", action = "PaqUpdate" },
 			{ icon = " ", desc = "Quit Neovim                ", key = "q", action = "qa!" },
@@ -35,15 +35,17 @@ dashboard.setup({
 			local messages = {
 				"Vim is my favourite text editor. I've been using it for years...I can't figure out how to exit.",
 				"Welcome to  macs!",
-				"you try to dd your water spill.",
+				"did you try to dd your water spill?",
 				"Nah, I'd  im",
 				"Setting up Neovim is a long and messy road that never ends.",
 				"Helping people write bugs since 1991",
 				'ciw""󱊷 P',
 				"brain.exists() = False",
+				"The one true text editor.",
+				" comes with Telescope!",
 			}
 
-			local date = os.date("%a, %Y / %m / %d")
+			local date = os.date("%a, %Y / %m / %d"):gsub("^%l", string.upper)
 			local version = " " .. vim.version().major .. "." .. vim.version().minor .. " - 󰃭 " .. date
 			local message = messages[math.random(#messages)]
 

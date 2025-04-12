@@ -19,6 +19,7 @@ require("settings.symbols")
 require("settings.tabs")
 require("settings.dashboard")
 require("settings.rpc")
+require("settings.telescope")
 
 -- whichKey setup
 local wk = require("which-key")
