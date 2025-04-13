@@ -43,5 +43,6 @@ require("lazy").setup({
 	{ "spelis/project.nvim", branch = "patch-1" }, -- recent projects
 	"rcarriga/nvim-notify", -- prettier notifications
 	"rmagatti/auto-session", -- restore session
-	{"linux-cultist/venv-selector.nvim", branch="regexp",lazy=false}
+	{ "linux-cultist/venv-selector.nvim", branch = "regexp", lazy = false },
+	"nosduco/remote-sshfs.nvim",
 })

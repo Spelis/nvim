@@ -1,6 +1,6 @@
 local dashboard = require("dashboard")
 local conf = vim.api.nvim_exec('echo stdpath("config")', true)
-local function startuptime()
+function startuptime()
 	return (math.floor(require("lazy.stats").stats().startuptime * 100 + 0.5) / 100)
 end
 
@@ -26,11 +26,12 @@ dashboard.setup({
 		},
 		center = {
 			{ icon = " ", desc = "New file                   ", key = "n", action = "ene" },
-			{ icon = "󱀸 ", desc = "Restore Session            ", key = "s", action = "SessionRestore" },
+			{ icon = "󱀸 ", desc = "Restore Session            ", key = "sr", action = "SessionRestore" },
 			{ icon = " ", desc = "Find file                  ", key = "f", action = "Telescope find_files" },
 			{ icon = "󰚰 ", desc = "Recently used files        ", key = "r", action = "Telescope oldfiles" },
 			{ icon = "󱎸 ", desc = "Find text                  ", key = "t", action = "Telescope live_grep" },
-			{ icon = " ", desc = "Recent Projects            ", key = "p", action = "Telescope projects" },
+			{ icon = " ", desc = "Recent Projects            ", key = "pl", action = "Telescope projects" },
+			{ icon = "󰛳 ", desc = "Remote Projects            ", key = "pn", action = "RemoteSSHFSConnect" },
 			{
 				icon = " ",
 				desc = "Configuration              ",
