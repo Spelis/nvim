@@ -15,7 +15,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-	"savq/paq-nvim", -- auto update paq
 	"nvim-tree/nvim-web-devicons", -- nerd font support, common dependency
 	"catppuccin/nvim", -- catppuccin theme
 	"nvim-lualine/lualine.nvim", -- status line
@@ -44,4 +43,5 @@ require("lazy").setup({
 	{ "spelis/project.nvim", branch = "patch-1" }, -- recent projects
 	"rcarriga/nvim-notify", -- prettier notifications
 	"rmagatti/auto-session", -- restore session
+	{"linux-cultist/venv-selector.nvim", branch="regexp",lazy=false}
 })

@@ -14,6 +14,7 @@ vim.keymap.set("n", "<leader>qq", "<cmd>q<CR>", { desc = "Quit Nvim" })
 
 vim.keymap.set("n", "<leader>bn", "<cmd>ene <BAR> startinsert <CR>", { desc = "Create new file" })
 vim.keymap.set("n", "<leader>bd", "<cmd>Dashboard<CR>", { desc = "Go back to Dashboard" })
+vim.keymap.set("n", "<leader>bpv", "<cmd>VenvSelect<CR>", {desc="Select Python Interpreter"})
 
 vim.keymap.set("n", "<C-s>", "<cmd>w<CR>", { desc = "Save current buffer" })
 

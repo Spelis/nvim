@@ -26,9 +26,9 @@ dashboard.setup({
 		},
 		center = {
 			{ icon = " ", desc = "New file                   ", key = "n", action = "ene" },
-			{ icon = "󱀸 ", desc = "Restore Session            ", key = "r", action = "SessionRestore" },
+			{ icon = "󱀸 ", desc = "Restore Session            ", key = "s", action = "SessionRestore" },
 			{ icon = " ", desc = "Find file                  ", key = "f", action = "Telescope find_files" },
-			{ icon = "󰚰 ", desc = "Recently used files        ", key = "o", action = "Telescope oldfiles" },
+			{ icon = "󰚰 ", desc = "Recently used files        ", key = "r", action = "Telescope oldfiles" },
 			{ icon = "󱎸 ", desc = "Find text                  ", key = "t", action = "Telescope live_grep" },
 			{ icon = " ", desc = "Recent Projects            ", key = "p", action = "Telescope projects" },
 			{
