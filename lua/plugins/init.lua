@@ -1,4 +1,20 @@
-require("paq")({
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+	local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+	if vim.v.shell_error ~= 0 then
+		vim.api.nvim_echo({
+			{ "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+			{ out, "WarningMsg" },
+			{ "\nPress any key to exit..." },
+		}, true, {})
+		vim.fn.getchar()
+		os.exit(1)
+	end
+end
+vim.opt.rtp:prepend(lazypath)
+
+require("lazy").setup({
 	"savq/paq-nvim", -- auto update paq
 	"nvim-tree/nvim-web-devicons", -- nerd font support, common dependency
 	"catppuccin/nvim", -- catppuccin theme
@@ -22,12 +38,10 @@ require("paq")({
 	"ray-x/lsp_signature.nvim", -- Function signature hints
 	"folke/trouble.nvim", -- errors and warnings pane
 	"stevearc/conform.nvim", -- formatting
-	"simrat39/symbols-outline.nvim",
 	"lewis6991/gitsigns.nvim",
-	"nvimdev/dashboard-nvim",
-	"nvim-telescope/telescope-media-files.nvim",
-	"andweeb/presence.nvim",
-	"ahmedkhalf/project.nvim",
+	"nvimdev/dashboard-nvim", -- dashboard, obviously
+	"andweeb/presence.nvim", -- discord rich presence
+	{ "spelis/project.nvim", branch = "patch-1" }, -- recent projects
+	"rcarriga/nvim-notify", -- prettier notifications
+	"rmagatti/auto-session", -- restore session
 })
-
-vim.cmd([[PaqInstall]]) -- Install all packages

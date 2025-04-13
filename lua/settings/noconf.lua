@@ -1,4 +1,6 @@
 require("nvim-autopairs").setup({})
 require("project_nvim").setup({})
-require("trouble").setup()
-require("toggleterm").setup()
+require("trouble").setup({
+	auto_close = true,
+})
+require("toggleterm").setup({})

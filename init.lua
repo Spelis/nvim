@@ -1,7 +1,8 @@
-local vim = vim -- reduses errors
+local vim = vim -- reduces errors
 vim.g.mapleader = " "
 
 require("plugins.init")
+require("settings.notif")
 
 vim.cmd([[set number]])
 vim.cmd([[set relativenumber]])
@@ -17,7 +18,6 @@ require("settings.status")
 require("settings.noconf")
 require("settings.symbols")
 require("settings.tabs")
-require("settings.dashboard")
 require("settings.rpc")
 require("settings.telescope")
 
@@ -29,3 +29,4 @@ wk.add({
 
 require("settings.lsp")
 require("settings.formatting")
+require("settings.dashboard")

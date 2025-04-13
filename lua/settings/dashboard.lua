@@ -1,5 +1,8 @@
 local dashboard = require("dashboard")
-local conf = vim.api.nvim_exec('echo stdpath("config")', true) .. "/init.lua"
+local conf = vim.api.nvim_exec('echo stdpath("config")', true)
+local function startuptime()
+	return (math.floor(require("lazy.stats").stats().startuptime * 100 + 0.5) / 100)
+end
 
 -- Setup with centered layout
 dashboard.setup({
@@ -22,13 +25,19 @@ dashboard.setup({
 			"",
 		},
 		center = {
-			{ icon = " ", desc = "New file                   ", key = "n", action = "ene | startinsert" },
-			{ icon = " ", desc = "Find file                  ", key = "ff", action = "Telescope find_files" },
-			{ icon = "󰚰 ", desc = "Recently used files        ", key = "fr", action = "Telescope oldfiles" },
-			{ icon = "󱎸 ", desc = "Find text                  ", key = "ft", action = "Telescope live_grep" },
+			{ icon = " ", desc = "New file                   ", key = "n", action = "ene" },
+			{ icon = "󱀸 ", desc = "Restore Session            ", key = "r", action = "SessionRestore" },
+			{ icon = " ", desc = "Find file                  ", key = "f", action = "Telescope find_files" },
+			{ icon = "󰚰 ", desc = "Recently used files        ", key = "o", action = "Telescope oldfiles" },
+			{ icon = "󱎸 ", desc = "Find text                  ", key = "t", action = "Telescope live_grep" },
 			{ icon = " ", desc = "Recent Projects            ", key = "p", action = "Telescope projects" },
-			{ icon = " ", desc = "Configuration              ", key = "c", action = "e " .. conf },
-			{ icon = "󰑓 ", desc = "Update                     ", key = "u", action = "PaqUpdate" },
+			{
+				icon = " ",
+				desc = "Configuration              ",
+				key = "c",
+				action = "e " .. conf .. "/init.lua | chdir " .. conf,
+			},
+			{ icon = "󰒲 ", desc = "Lazy                       ", key = "l", action = "Lazy" },
 			{ icon = " ", desc = "Quit Neovim                ", key = "q", action = "qa!" },
 		},
 		footer = function()
@@ -43,19 +52,25 @@ dashboard.setup({
 				"brain.exists() = False",
 				"The one true text editor.",
 				" comes with Telescope!",
+				'"Write programs that do one thing and do it well." - Unix philosophy',
+				"NVidia, Fuck you. ",
+				"Did you mean 'emacs'?",
+				"Linux is only free if your time has no value.",
+				"All operating systems suck, but Linux just sucks less",
+				"i use arch btw.",
+				"cat 󰄛 ",
 			}
 
 			local date = os.date("%a, %Y / %m / %d"):gsub("^%l", string.upper)
 			local version = " " .. vim.version().major .. "." .. vim.version().minor .. " - 󰃭 " .. date
+			local sut = " " .. startuptime() .. "ms"
 			local message = messages[math.random(#messages)]
-
-			-- Center alignment calculation
-			local max_width = math.max(#message, #version)
 
 			return {
 				"",
 				message,
 				version,
+				sut,
 			}
 		end,
 
@@ -64,6 +79,9 @@ dashboard.setup({
 		packages = { enable = false }, -- Disable package stats
 		shortcut = false, -- Disable default shortcuts
 		vertical_center = true,
+		hide = {
+			statusline = false,
+		},
 	},
 })
 
