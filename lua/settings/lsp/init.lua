@@ -32,3 +32,21 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.opt_local.relativenumber = false
 	end,
 })
+
+require("ibl").setup({
+	exclude = {
+		filetypes = {
+			"dashboard",
+			"help",
+			"terminal",
+			"lazy",
+			"TelescopePrompt",
+		},
+		buftypes = {
+			"terminal",
+			"nofile",
+			"quickfix",
+			"prompt",
+		},
+	},
+})

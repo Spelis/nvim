@@ -53,4 +53,5 @@ require("lazy").setup({
 		build = "pnpm add -g live-server",
 		cmd = { "LiveServerStart", "LiveServerStop" },
 	},
+	{ "lukas-reineke/indent-blankline.nvim" },
 })
