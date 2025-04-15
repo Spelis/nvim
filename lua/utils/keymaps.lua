@@ -1,5 +1,7 @@
 local fzf = require("telescope.builtin")
 local wk = require("which-key")
+local vim = vim
+local km = vim.keymap.set -- i learnt to use vim search and replace while changing everything from keymap.set to km
 
 wk.add({
 	{ "<leader>t", group = "Toggle" },
@@ -11,33 +13,40 @@ wk.add({
 })
 
 -- keybinds
-vim.keymap.set("n", ";", ":", { desc = "Run Command" })
+km("n", ";", ":", { desc = "Run Command" })
+km("n", "<Esc>", "<cmd>noh<CR>")
 
-vim.keymap.set("n", "<leader>tt", "<cmd>ToggleTerm direction=float | startinsert<CR>", { desc = "Toggle Terminal" })
-vim.keymap.set("n", "<leader>te", "<cmd>Trouble diagnostics<CR>", { desc = "Toggle Error Pane" })
+km("n", "<leader>tt", "<cmd>ToggleTerm direction=float | startinsert<CR>", { desc = "Toggle Terminal" })
+km("n", "<leader>te", "<cmd>Trouble diagnostics<CR>", { desc = "Toggle Error Pane" })
 
-vim.keymap.set("t", "<Esc>", "<C-d>", { desc = "Close Terminal" })
+km("t", "<Esc>", "", { desc = "Close Terminal" })
 
-vim.keymap.set("n", "<leader>qw", "<cmd>wq<CR>", { desc = "Write and Quit" })
-vim.keymap.set("n", "<leader>qf", "<cmd>q!<CR>", { desc = "Force Quit" })
-vim.keymap.set("n", "<leader>qq", "<cmd>q<CR>", { desc = "Quit Nvim" })
+km("n", "<leader>qw", "<cmd>wq<CR>", { desc = "Write and Quit" })
+km("n", "<leader>qf", "<cmd>q!<CR>", { desc = "Force Quit" })
+km("n", "<leader>qq", "<cmd>q<CR>", { desc = "Quit Nvim" })
 
-vim.keymap.set("n", "<leader>bn", "<cmd>ene<CR>", { desc = "Create new file" })
-vim.keymap.set("n", "<leader>bd", "<cmd>Dashboard<CR>", { desc = "Go back to Dashboard" })
-vim.keymap.set("n", "<leader>bpv", "<cmd>VenvSelect<CR>", { desc = "Select Python Interpreter" })
-vim.keymap.set("n", "<leader>bw", "<cmd>w<CR>", { desc = "Write Buffer" })
-vim.keymap.set("n", "<leader>bqs", "<cmd>BufferLinePickClose<CR>", { desc = "Select buffer to close" })
-vim.keymap.set("n", "<leader>bqc", "<cmd>bdelete<CR>", { desc = "Close current buffer" })
+km("n", "<leader>bn", "<cmd>ene<CR>", { desc = "Create new file" })
+km("n", "<leader>bd", "<cmd>Dashboard<CR>", { desc = "Go back to Dashboard" })
+km("n", "<leader>bpv", "<cmd>VenvSelect<CR>", { desc = "Select Python Interpreter" })
+km("n", "<leader>bw", "<cmd>w<CR>", { desc = "Write Buffer" })
 
-vim.keymap.set("n", "<C-s>", "<cmd>w<CR>", { desc = "Save current buffer" })
+km("n", "<leader>bqs", "<cmd>BufferLinePickClose<CR>", { desc = "Select buffer to close" })
+km("n", "<leader>bqc", "<cmd>bdelete<CR>", { desc = "Close current buffer" })
+km("n", "<leader>bqr", "<cmd>BufferLineCloseRight", { desc = "Close all buffers to the right" })
+km("n", "<leader>bql", "<cmd>BufferLineCloseLeft", { desc = "Close all buffers to the left" })
 
-vim.keymap.set("n", "<leader>le", "$", { desc = "Go to End of Line" })
-vim.keymap.set("n", "<leader>ll", "G", { desc = "Go to Last Line" })
-vim.keymap.set("n", "<leader>lf", "gg", { desc = "Go to First Line" })
+km("n", "<C-s>", "<cmd>w<CR>", { desc = "Save current buffer" })
+km("i", "<C-s>", "<Esc><cmd>w<CR>a", { desc = "Save current buffer" })
+km("n", "<C-w>", "<cmd>bdelete<CR>", { desc = "Close current buffer" })
+km("i", "<C-w>", "<Esc><cmd>bdelete<CR>", { desc = "Close current buffer" })
 
-vim.keymap.set("n", "<leader>ff", fzf.find_files, { desc = "Telescope Find Files" })
-vim.keymap.set("n", "<leader>fb", fzf.buffers, { desc = "Telescope Buffers" })
-vim.keymap.set("n", "<leader>fr", fzf.oldfiles, { desc = "Telescope Recent Files" })
-vim.keymap.set("n", "<leader>fp", "<cmd>Telescope projects<CR>", { desc = "Telescope Recent Projects" })
-vim.keymap.set("n", "<leader>ft", fzf.live_grep, { desc = "Telescope Find Text" })
-vim.keymap.set("n", "<leader>fn", "<cmd>RemoteSSHFSConnect<CR>", { desc = "Find SSH Connections" })
+km("n", "<leader>le", "$", { desc = "Go to End of Line" })
+km("n", "<leader>ll", "G", { desc = "Go to Last Line" })
+km("n", "<leader>lf", "gg", { desc = "Go to First Line" })
+
+km("n", "<leader>ff", fzf.find_files, { desc = "Telescope Find Files" })
+km("n", "<leader>fb", fzf.buffers, { desc = "Telescope Buffers" })
+km("n", "<leader>fr", fzf.oldfiles, { desc = "Telescope Recent Files" })
+km("n", "<leader>fp", "<cmd>Telescope projects<CR>", { desc = "Telescope Recent Projects" })
+km("n", "<leader>ft", fzf.live_grep, { desc = "Telescope Find Text" })
+km("n", "<leader>fn", "<cmd>RemoteSSHFSConnect<CR>", { desc = "Find SSH Connections" })

@@ -28,6 +28,7 @@ require("lazy").setup({
 	"neovim/nvim-lspconfig", -- configure LSPs
 	"williamboman/mason.nvim", -- install language servers
 	"williamboman/mason-lspconfig.nvim", -- auto install, auto activate etc
+	{ "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" }, -- TreeSitter
 	"Bekaboo/dropbar.nvim", -- breadcrumbs
 	"hrsh7th/nvim-cmp", -- completer
 	"hrsh7th/cmp-nvim-lsp", -- lsp source
@@ -40,9 +41,16 @@ require("lazy").setup({
 	"lewis6991/gitsigns.nvim",
 	"nvimdev/dashboard-nvim", -- dashboard, obviously
 	"andweeb/presence.nvim", -- discord rich presence
-	{ "spelis/project.nvim", branch = "patch-1" }, -- recent projects
+	"spelis/project.nvim", -- recent projects
 	"rcarriga/nvim-notify", -- prettier notifications
 	"rmagatti/auto-session", -- restore session
 	{ "linux-cultist/venv-selector.nvim", branch = "regexp", lazy = false },
 	"nosduco/remote-sshfs.nvim",
+	"ya2s/nvim-cursorline",
+	{ "lukas-reineke/headlines.nvim", ft = "markdown", config = true },
+	{
+		"barrett-ruth/live-server.nvim",
+		build = "pnpm add -g live-server",
+		cmd = { "LiveServerStart", "LiveServerStop" },
+	},
 })

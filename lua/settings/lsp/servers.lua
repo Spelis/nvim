@@ -1,22 +1,30 @@
-local lspconfig = require "lspconfig"
+local lspconfig = require("lspconfig")
 
-lspconfig.pyright.setup {
-  capabilities = require("cmp_nvim_lsp").default_capabilities(),
-  settings = {
-    pyright = {
-      analysis = {
-        autoSearchPaths = true,
-        diagnosticMode = "workspace",
-        useLibraryCodeForTypes = true,
-      },
-    },
-  },
+lspconfig.pyright.setup({
+	capabilities = require("cmp_nvim_lsp").default_capabilities(),
+	settings = {
+		pyright = {
+			analysis = {
+				autoSearchPaths = true,
+				diagnosticMode = "workspace",
+				useLibraryCodeForTypes = true,
+			},
+		},
+	},
+})
+
+local servers = {
+	"gopls",
+	"clangd",
+	"bashls",
+	"dockerls",
+	"tailwindcss",
+	"marksman",
+	"lua_ls",
 }
 
-lspconfig.lua_ls.setup {
-  capabilities = require("cmp_nvim_lsp").default_capabilities(),
-}
-
-lspconfig.marksman.setup {
-  capabilities = require("cmp_nvim_lsp").default_capabilities(),
-}
+for _, server in ipairs(servers) do
+	lspconfig[server].setup({
+		capabilities = require("cmp_nvim_lsp").default_capabilities(),
+	})
+end
