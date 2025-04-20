@@ -21,6 +21,7 @@ local servers = {
 	"tailwindcss",
 	"marksman",
 	"lua_ls",
+	"html",
 }
 
 for _, server in ipairs(servers) do

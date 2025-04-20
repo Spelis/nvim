@@ -35,6 +35,9 @@ require("lazy").setup({
 	"hrsh7th/cmp-path", -- File paths
 	"hrsh7th/cmp-cmdline", -- Commands
 	"onsails/lspkind.nvim", -- Icons in completion menu
+	{ "L3MON4D3/LuaSnip", build = "make install_jsregexp" }, -- Snippets
+	"rafamadriz/friendly-snippets", -- VSCode like snippets
+	"saadparwaiz1/cmp_luasnip", -- snippets in cmp
 	"ray-x/lsp_signature.nvim", -- Function signature hints
 	"folke/trouble.nvim", -- errors and warnings pane
 	"stevearc/conform.nvim", -- formatting
@@ -47,6 +50,8 @@ require("lazy").setup({
 	{ "linux-cultist/venv-selector.nvim", branch = "regexp", lazy = false },
 	"nosduco/remote-sshfs.nvim",
 	"ya2s/nvim-cursorline",
+	"nvim-tree/nvim-tree.lua",
+	{ "rrethy/vim-hexokinase", build = "make hexokinase" },
 	{ "lukas-reineke/headlines.nvim", ft = "markdown", config = true },
 	{
 		"barrett-ruth/live-server.nvim",

@@ -7,7 +7,6 @@ wk.add({
 	{ "<leader>t", group = "Toggle" },
 	{ "<leader>q", group = "Quit" },
 	{ "<leader>b", group = "Buffers" },
-	{ "<leader>l", group = "Movement" },
 	{ "<leader>f", group = "Find" },
 	{ "<leader>bq", group = "Close Buffer" },
 })
@@ -40,13 +39,12 @@ km("i", "<C-s>", "<Esc><cmd>w<CR>a", { desc = "Save current buffer" })
 km("n", "<C-w>", "<cmd>bdelete<CR>", { desc = "Close current buffer" })
 km("i", "<C-w>", "<Esc><cmd>bdelete<CR>", { desc = "Close current buffer" })
 
-km("n", "<leader>le", "$", { desc = "Go to End of Line" })
-km("n", "<leader>ll", "G", { desc = "Go to Last Line" })
-km("n", "<leader>lf", "gg", { desc = "Go to First Line" })
-
 km("n", "<leader>ff", fzf.find_files, { desc = "Telescope Find Files" })
 km("n", "<leader>fb", fzf.buffers, { desc = "Telescope Buffers" })
 km("n", "<leader>fr", fzf.oldfiles, { desc = "Telescope Recent Files" })
 km("n", "<leader>fp", "<cmd>Telescope projects<CR>", { desc = "Telescope Recent Projects" })
 km("n", "<leader>ft", fzf.live_grep, { desc = "Telescope Find Text" })
 km("n", "<leader>fn", "<cmd>RemoteSSHFSConnect<CR>", { desc = "Find SSH Connections" })
+
+km("n", "<C-e>", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle File Tree" })
+km("i", "<C-e>", "<Esc><cmd>NvimTreeToggle<CR>i", { desc = "Toggle File Tree" })

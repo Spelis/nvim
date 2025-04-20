@@ -10,6 +10,7 @@ cmp.setup({
 		{ name = "nvim_lsp" },
 		{ name = "buffer" },
 		{ name = "path" },
+		{ name = "luasnip" },
 	}),
 	experimental = {
 		ghost_text = true, -- VSCode-like inline ghost text

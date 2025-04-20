@@ -1,13 +1,27 @@
 require("mason").setup()
 require("mason-lspconfig").setup({
-	ensure_installed = { "lua_ls", "pyright", "gopls", "clangd", "bashls", "dockerls", "tailwindcss", "marksman" }, -- Add your LSPs here
+	ensure_installed = {
+		"lua_ls",
+		"pyright",
+		"gopls",
+		"clangd",
+		"bashls",
+		"dockerls",
+		"tailwindcss",
+		"marksman",
+		"html",
+	}, -- Add your LSPs here
 })
 
 require("gitsigns").setup({})
+vim.g.Hexokinase = { "sign_column" }
 
 require("settings.lsp.comp")
 require("settings.lsp.servers")
 require("settings.lsp.sig")
+
+require("luasnip.loaders.from_vscode").lazy_load()
+require("luasnip").filetype_extend("html", { "html" })
 
 require("auto-session").setup({ -- doesn't belong here but whatever im tired of making new files
 	auto_save = true,
