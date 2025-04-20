@@ -36,8 +36,6 @@ km("n", "<leader>bql", "<cmd>BufferLineCloseLeft", { desc = "Close all buffers t
 
 km("n", "<C-s>", "<cmd>w<CR>", { desc = "Save current buffer" })
 km("i", "<C-s>", "<Esc><cmd>w<CR>a", { desc = "Save current buffer" })
-km("n", "<C-w>", "<cmd>bdelete<CR>", { desc = "Close current buffer" })
-km("i", "<C-w>", "<Esc><cmd>bdelete<CR>", { desc = "Close current buffer" })
 
 km("n", "<leader>ff", fzf.find_files, { desc = "Telescope Find Files" })
 km("n", "<leader>fb", fzf.buffers, { desc = "Telescope Buffers" })
