@@ -16,7 +16,10 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
 	"nvim-tree/nvim-web-devicons", -- nerd font support, common dependency
-	"catppuccin/nvim", -- catppuccin theme
+	{
+		"catppuccin/nvim",
+		name = "catppuccin",
+	}, -- Catppuccin :3
 	"nvim-lualine/lualine.nvim", -- status line
 	"windwp/nvim-autopairs", -- auto close brackets
 	"akinsho/toggleterm.nvim", -- terminal

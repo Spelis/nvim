@@ -3,6 +3,14 @@ vim.g.mapleader = " "
 
 require("plugins.init")
 
+require("catppuccin").setup({
+	show_end_of_buffer = true,
+	styles = {
+		comments = { "italic" },
+		keywords = { "bold" },
+	},
+})
+
 vim.cmd([[set number]])
 vim.cmd([[set relativenumber]])
 vim.cmd([[colorscheme catppuccin-mocha]]) -- Catppuccin :3

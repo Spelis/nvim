@@ -18,7 +18,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 	nested = true,
 	callback = function()
 		local buf = vim.api.nvim_get_current_buf()
-		if vim.bo[buf].filetype == "NvimTree" and vim.fn.win_getid(vim.fn.winnr("p"), "$") ~= -1 then
+		if vim.bo[buf].filetype == "NvimTree" and vim.fn.win_getid(vim.fn.winnr(), "$") ~= -1 then
 			vim.cmd("close")
 		end
 	end,

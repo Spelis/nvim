@@ -20,9 +20,7 @@ km("n", "<leader>te", "<cmd>Trouble diagnostics<CR>", { desc = "Toggle Error Pan
 
 km("t", "<Esc>", "", { desc = "Close Terminal" })
 
-km("n", "<leader>qw", "<cmd>wq<CR>", { desc = "Write and Quit" })
-km("n", "<leader>qf", "<cmd>q!<CR>", { desc = "Force Quit" })
-km("n", "<leader>qq", "<cmd>q<CR>", { desc = "Quit Nvim" })
+km("n", "<leader>qq", "<cmd>wq<CR>", { desc = "Quit Nvim" })
 
 km("n", "<leader>bn", "<cmd>ene<CR>", { desc = "Create new file" })
 km("n", "<leader>bd", "<cmd>Dashboard<CR>", { desc = "Go back to Dashboard" })
@@ -36,6 +34,7 @@ km("n", "<leader>bql", "<cmd>BufferLineCloseLeft", { desc = "Close all buffers t
 
 km("n", "<C-s>", "<cmd>w<CR>", { desc = "Save current buffer" })
 km("i", "<C-s>", "<Esc><cmd>w<CR>a", { desc = "Save current buffer" })
+km("v", "<C-a>", "<Esc>ggVG", { desc = "Select all" })
 
 km("n", "<leader>ff", fzf.find_files, { desc = "Telescope Find Files" })
 km("n", "<leader>fb", fzf.buffers, { desc = "Telescope Buffers" })
