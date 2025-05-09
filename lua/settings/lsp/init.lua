@@ -13,7 +13,6 @@ require("mason-lspconfig").setup({
 	}, -- Add your LSPs here
 })
 
-require("gitsigns").setup({})
 vim.g.Hexokinase = { "sign_column" }
 
 require("settings.lsp.comp")

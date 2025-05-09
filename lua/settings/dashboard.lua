@@ -1,6 +1,6 @@
 local dashboard = require("dashboard")
 local conf = vim.api.nvim_exec('echo stdpath("config")', true)
-function startuptime()
+local function startuptime()
 	return (math.floor(require("lazy.stats").stats().startuptime * 100 + 0.5) / 100)
 end
 

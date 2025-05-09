@@ -27,7 +27,17 @@ require("lazy").setup({
 	"folke/which-key.nvim", -- keybind helper
 	"nvim-lua/plenary.nvim",
 	"nvim-telescope/telescope.nvim", -- fzf
-	"nvim-telescope/telescope-fzf-native.nvim", -- fzf (dependency of dropbar.nvim)
+	{
+		"nvim-telescope/telescope-fzf-native.nvim",
+		build = "make",
+		config = function()
+			pcall(function()
+				require("telescope").load_extension("fzf")
+			end)
+		end,
+	}, -- fzf (dependency of dropbar.nvim)
+	"nvim-telescope/telescope-ui-select.nvim",
+	"sindrets/diffview.nvim", -- git diffview
 	"neovim/nvim-lspconfig", -- configure LSPs
 	"williamboman/mason.nvim", -- install language servers
 	"williamboman/mason-lspconfig.nvim", -- auto install, auto activate etc
@@ -42,7 +52,6 @@ require("lazy").setup({
 	"rafamadriz/friendly-snippets", -- VSCode like snippets
 	"saadparwaiz1/cmp_luasnip", -- snippets in cmp
 	"ray-x/lsp_signature.nvim", -- Function signature hints
-	"folke/trouble.nvim", -- errors and warnings pane
 	"stevearc/conform.nvim", -- formatting
 	"lewis6991/gitsigns.nvim",
 	"nvimdev/dashboard-nvim", -- dashboard, obviously

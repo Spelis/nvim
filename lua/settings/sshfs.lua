@@ -6,12 +6,16 @@ require("remote-sshfs").setup({
 		},
 		ui = {
 			confirm = {
-				change_dir = true,
+				connect = false,
+				change_dir = false,
 			},
 		},
 		handlers = {
 			on_connect = {
 				change_dir = true,
+				callback = function()
+					vim.cmd("stopinsert") -- exit insert after connecting
+				end,
 			},
 			on_disconnect = {
 				clean_mount_folders = true,

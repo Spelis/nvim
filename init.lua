@@ -1,4 +1,3 @@
-local vim = vim -- reduces errors
 vim.g.mapleader = " "
 
 require("plugins.init")
@@ -33,3 +32,4 @@ require("settings.formatting")
 require("settings.noconf")
 require("settings.dashboard")
 require("settings.whichkey")
+require("settings.git")

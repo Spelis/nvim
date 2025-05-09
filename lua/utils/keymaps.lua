@@ -15,10 +15,7 @@ wk.add({
 km("n", ";", ":", { desc = "Run Command" })
 km("n", "<Esc>", "<cmd>noh<CR>")
 
-km("n", "<leader>tt", "<cmd>ToggleTerm direction=float | startinsert<CR>", { desc = "Toggle Terminal" })
-km("n", "<leader>te", "<cmd>Trouble diagnostics<CR>", { desc = "Toggle Error Pane" })
-
-km("t", "<Esc>", "", { desc = "Close Terminal" })
+km("n", "<leader>tt", "<cmd>ToggleTerm direction=float<CR>i", { desc = "Toggle Terminal" })
 
 km("n", "<leader>qq", "<cmd>wq<CR>", { desc = "Quit Nvim" })
 
@@ -42,6 +39,8 @@ km("n", "<leader>fr", fzf.oldfiles, { desc = "Telescope Recent Files" })
 km("n", "<leader>fp", "<cmd>Telescope projects<CR>", { desc = "Telescope Recent Projects" })
 km("n", "<leader>ft", fzf.live_grep, { desc = "Telescope Find Text" })
 km("n", "<leader>fn", "<cmd>RemoteSSHFSConnect<CR>", { desc = "Find SSH Connections" })
+km("n", "<leader>fd", "<cmd>Telescope diagnostics<CR>", { desc = "Telescope Diagnostics" })
+km("n", "<leader>fs", fzf.lsp_document_symbols, { desc = "Telescope symbols" })
 
 km("n", "<C-e>", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle File Tree" })
 km("i", "<C-e>", "<Esc><cmd>NvimTreeToggle<CR>i", { desc = "Toggle File Tree" })
