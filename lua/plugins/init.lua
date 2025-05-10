@@ -38,6 +38,7 @@ require("lazy").setup({
 	}, -- fzf (dependency of dropbar.nvim)
 	"nvim-telescope/telescope-ui-select.nvim",
 	"sindrets/diffview.nvim", -- git diffview
+	"frankroeder/parrot.nvim",
 	"neovim/nvim-lspconfig", -- configure LSPs
 	"williamboman/mason.nvim", -- install language servers
 	"williamboman/mason-lspconfig.nvim", -- auto install, auto activate etc
