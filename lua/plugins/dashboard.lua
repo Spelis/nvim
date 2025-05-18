@@ -3,16 +3,27 @@ local function startuptime()
 	return (math.floor(require("lazy.stats").stats().startuptime * 100 + 0.5) / 100)
 end
 
-local function extendlist(l1, l2)
-	local ret = {}
-	for i, v in ipairs(l1) do
-		table.insert(ret, v)
+function get_greeting()
+	local hour = tonumber(os.date("%H"))
+	if hour >= 5 and hour < 12 then
+		return "Good morning"
+	elseif hour >= 12 and hour < 17 then
+		return "Good afternoon"
+	elseif hour >= 17 and hour < 21 then
+		return "Good evening"
+	else
+		return "Good night"
 	end
-	for i, v in ipairs(l2) do
-		table.insert(ret, v)
-	end
-	return ret
 end
+
+function random_char_append(str, chars)
+	local rand_index = math.random(1, #chars)
+	return str .. chars:sub(rand_index, rand_index)
+end
+
+local username = os.getenv("USER") or os.getenv("USERNAME")
+username = username:gsub("^%l", string.upper)
+local greet = get_greeting() .. ", " .. username .. "!"
 
 return {
 	{
@@ -26,6 +37,7 @@ return {
 	{ "spelis/project.nvim" },
 	{
 		"nvimdev/dashboard-nvim",
+		event = "VimEnter",
 		opts = {
 			theme = "doom",
 			config = {
@@ -41,27 +53,24 @@ return {
 					[[ ██████  █████████████████████ ████ █████ █████ ████ ██████ ]],
 					[[                                                                       ]],
 					"",
-					"",
 					"󱐋 Powered By  eovim",
+					greet,
 					"",
 				},
-				center = extendlist({
+				center = {
 					{ icon = " ", desc = "New file                   ", key = "n", action = "ene" },
 					{ icon = "󱀸 ", desc = "Restore Session            ", key = "sr", action = "SessionRestore" },
 					{ icon = "󰚰 ", desc = "Project Browser            ", key = "sl", action = "Telescope projects" },
-					{ icon = "󰛳 ", desc = "SSH Connections            ", key = "ss", action = "RemoteSSHFSConnect" },
 					{ icon = " ", desc = "Find file                  ", key = "f", action = "Telescope find_files" },
 					{ icon = "󰚰 ", desc = "Recently used files        ", key = "r", action = "Telescope oldfiles" },
-					{ icon = "󱎸 ", desc = "Find text                  ", key = "t", action = "Telescope live_grep" },
 					{
 						icon = " ",
 						desc = "Configuration              ",
 						key = "c",
 						action = "e " .. conf .. "/init.lua | chdir " .. conf,
 					},
-					{ icon = "󰒲 ", desc = "Lazy                       ", key = "l", action = "Lazy" },
 					{ icon = " ", desc = "Quit Neovim                ", key = "q", action = "qa!" },
-				}, {}), -- allows for dynamically adding stuff to the list, probably a better way to do this.
+				},
 				footer = function()
 					local messages = {
 						"Vim is my favourite text editor. I've been using it for years...I can't figure out how to exit.",
@@ -70,8 +79,9 @@ return {
 						"Nah, I'd  im",
 						"Setting up Neovim is a long and messy road that never ends.",
 						"Helping people write bugs since 1991",
-						'ciw""󱊷 P',
-						"brain.exists() = False",
+						-- nice one nesting
+						random_char_append(random_char_append(random_char_append("", "vc"), "ia"), "\"'[({`"),
+						"not brain.exists == True",
 						"The one true text editor.",
 						" comes with Telescope!",
 						'"Write programs that do one thing and do it well." - Unix philosophy',
@@ -81,6 +91,26 @@ return {
 						"All operating systems suck, but Linux just sucks less",
 						"i use arch btw.",
 						"cat 󰄛 ",
+						"ggVG",
+						"why use C-c + C-v when you can use y + p?",
+						"arrow keys? nah, hjkl",
+						"Escape is just a suggestion.",
+						"99% configuring, 1% editing.",
+						"real devs :q without saving",
+						"I don't need therapy, I need :h",
+						"I use vim because I hate myself efficiently.",
+						"Everything is a buffer if you try hard enough.",
+						"rm -rf your expectations.",
+						"Today's bug is tomorrow's feature.",
+						"hjkl is my cardio",
+						"Every keystroke is a cry for help.",
+						"Always test in prod.",
+						"Just pushed to main. YOLO!",
+						"daw",
+						"yyp",
+						random_char_append("g", "Uu") .. "iw",
+						"zz",
+						"the config provider was too lazy to put a quote here, have a good rest of your day.",
 					}
 
 					local date = os.date("%a, %Y / %m / %d"):gsub("^%l", string.upper)
