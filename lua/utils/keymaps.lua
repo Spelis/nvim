@@ -42,5 +42,16 @@ km("n", "<leader>fn", "<cmd>RemoteSSHFSConnect<CR>", { desc = "Find SSH Connecti
 km("n", "<leader>fd", "<cmd>Telescope diagnostics<CR>", { desc = "Telescope Diagnostics" })
 km("n", "<leader>fs", fzf.lsp_document_symbols, { desc = "Telescope symbols" })
 
+local bufferlineopts = { noremap = true, silent = true }
+
+km("n", "<C-b>n", "<cmd>BufferLineCycleNext<CR>", bufferlineopts)
+km("n", "<C-b>p", "<cmd>BufferLineCyclePrev<CR>", bufferlineopts)
+km("n", "<C-b>l", "<cmd>BufferLineMoveNext<CR>", bufferlineopts)
+km("n", "<C-b>h", "<cmd>BufferLineMovePrev<CR>", bufferlineopts)
+km("n", "<C-b>ss", "<cmd>BufferLinePick<CR>", bufferlineopts)
+km("n", "<C-b>sq", "<cmd>BufferLinePickClose<CR>", bufferlineopts)
+km("n", "<C-b>q", "<cmd>bdelete<CR>", bufferlineopts)
+km("n", "<C-b>o", "<cmd>BufferLineCloseOthers<CR>", bufferlineopts)
+
 km("n", "<C-e>", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle File Tree" })
 km("i", "<C-e>", "<Esc><cmd>NvimTreeToggle<CR>i", { desc = "Toggle File Tree" })

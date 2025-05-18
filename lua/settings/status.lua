@@ -1,16 +1,25 @@
 -- Status line setup
 
 require("lualine").setup({
-	globalstatus = true,
+	options = {
+		component_separators = { left = "|", right = "|" },
+		section_separators = { left = nil, right = nil },
+		globalstatus = true,
+	},
 	sections = {
-		lualine_a = { "mode" },
-		lualine_b = { "branch", "location" },
+		lualine_a = { {
+			"mode",
+			fmt = function(res)
+				return res:sub(1, 1)
+			end,
+		} },
+		lualine_b = { "branch", "diff" },
 		lualine_c = {
 			{
 				"filename",
 				file_status = true,
 				newfile_status = true,
-				path = 1,
+				path = 3,
 				symbols = {
 					modified = "*", -- Text to show when the file is modified.
 					readonly = "!", -- Text to show when the file is non-modifiable or readonly.
@@ -20,8 +29,8 @@ require("lualine").setup({
 			},
 		},
 		lualine_x = { "diagnostics" },
-		lualine_y = { "branch" },
-		lualine_z = { "diff" },
+		lualine_y = { "location" },
+		lualine_z = { "filetype" },
 	},
 })
 

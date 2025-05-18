@@ -21,11 +21,18 @@ require("lazy").setup({
 		name = "catppuccin",
 	}, -- Catppuccin :3
 	"nvim-lualine/lualine.nvim", -- status line
+	{
+		dir = "~/Documents/Lua/fzf-createfile",
+		name = "fzfcf",
+		opts = {},
+	},
 	"windwp/nvim-autopairs", -- auto close brackets
 	"akinsho/toggleterm.nvim", -- terminal
 	"akinsho/bufferline.nvim", -- tab bar
 	"folke/which-key.nvim", -- keybind helper
 	"nvim-lua/plenary.nvim",
+	"folke/noice.nvim",
+	"MunifTanjim/nui.nvim",
 	"nvim-telescope/telescope.nvim", -- fzf
 	{
 		"nvim-telescope/telescope-fzf-native.nvim",
