@@ -1,7 +1,6 @@
 local conf = vim.api.nvim_exec('echo stdpath("config")', true)
-local function startuptime()
-	return (math.floor(require("lazy.stats").stats().startuptime * 100 + 0.5) / 100)
-end
+
+math.randomseed(os.time() + vim.loop.hrtime())
 
 function get_greeting()
 	local hour = tonumber(os.date("%H"))
@@ -21,9 +20,8 @@ function random_char_append(str, chars)
 	return str .. chars:sub(rand_index, rand_index)
 end
 
-footer = (function()
+footer = function()
 	local messages = {
-		"Vim is my favourite text editor. I've been using it for years...I can't figure out how to exit.",
 		"Welcome to  macs!",
 		"did you try to dd your water spill?",
 		"Nah, I'd  im",
@@ -33,7 +31,7 @@ footer = (function()
 		random_char_append(random_char_append(random_char_append("", "vc"), "ia"), "\"'[({`"),
 		"not brain.exists == True",
 		"The one true text editor.",
-		" comes with Telescope!",
+		" Comes with Telescope!",
 		'"Write programs that do one thing and do it well." - Unix philosophy',
 		"NVidia, Fuck you. ",
 		"Did you mean 'emacs'?",
@@ -60,16 +58,13 @@ footer = (function()
 		"yyp",
 		random_char_append("g", "Uu") .. "iw",
 		"zz",
-		"the config provider was too lazy to put a quote here, have a good rest of your day.",
+		"the config provider was too lazy to put a quote here, ignore me.",
 	}
 
-	local date = os.date("%a, %Y / %m / %d"):gsub("^%l", string.upper)
-	local version = " " .. vim.version().major .. "." .. vim.version().minor .. " - 󰃭 " .. date
-	local sut = " " .. startuptime() .. "ms"
 	local message = messages[math.random(#messages)]
 
 	return "\n" .. message
-end)()
+end
 
 local username = os.getenv("USER") or os.getenv("USERNAME")
 username = username:gsub("^%l", string.upper)
@@ -84,13 +79,13 @@ return {
 			bypass_save_filetype = { "dashboard" },
 		},
 	},
-	{ "spelis/project.nvim" },
+	{ "spelis/project.nvim", event = "BufReadPre" },
 
 	{
 		"folke/snacks.nvim",
 		opts = {
 			dashboard = {
-				width = 60,
+				width = 70,
 				row = nil,
 				col = nil,
 				pane_gap = 4,
@@ -141,10 +136,10 @@ return {
     █████████ ██████████ █████████ █████ █████ ████ █████   
   ███████████ ███    ███ █████████ █████ █████ ████ █████  
  ██████  █████████████████████ ████ █████ █████ ████ ██████ 
-                                                                       
+
 
 ]]
-						.. footer
+						.. footer()
 						.. "\n"
 						.. greet,
 
@@ -178,14 +173,6 @@ return {
 				sections = {
 					{ section = "header" },
 					{ section = "keys", gap = 1, padding = 1 },
-					{
-						section = "terminal",
-						cmd = "pokemon-colorscripts -r --no-title; sleep .1",
-						random = 10000,
-						pane = 2,
-						indent = 4,
-						height = 30,
-					},
 					{ section = "startup" },
 				},
 			},

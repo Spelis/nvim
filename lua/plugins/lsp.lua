@@ -1,51 +1,34 @@
 return {
 	{ "williamboman/mason.nvim", build = ":MasonUpdate", config = true },
-	{ "neovim/nvim-lspconfig" },
+	{ "neovim/nvim-lspconfig", event = "VeryLazy" },
 	{ "Bekaboo/dropbar.nvim", lazy = true },
-	{ "hrsh7th/cmp-nvim-lsp" },
+	{ "hrsh7th/cmp-nvim-lsp", event = "InsertEnter" },
 	{
 		"williamboman/mason-lspconfig.nvim",
-		dependencies = { "mason.nvim" },
+		event = "BufReadPre", -- delay LSP stuff until a file is opened
+		dependencies = { "williamboman/mason.nvim" },
 		config = function()
 			local mason_lsp = require("mason-lspconfig")
-
 			mason_lsp.setup({
-				ensure_installed = {
-					"lua_ls",
-					"pyright",
-					"gopls",
-					"clangd",
-					"bashls",
-					"dockerls",
-					"tailwindcss",
-					"marksman",
-					"html",
-				},
-				automatic_installation = true,
+				-- keep your config
 			})
 
 			local lspconfig = require("lspconfig")
 
-			-- fallback if setup_handlers is missing
-			if mason_lsp.setup_handlers then
-				mason_lsp.setup_handlers({
-					function(server_name)
-						lspconfig[server_name].setup({})
-					end,
-				})
-			else
-				for _, server_name in ipairs(mason_lsp.get_installed_servers()) do
+			mason_lsp.setup_handlers({
+				function(server_name)
 					lspconfig[server_name].setup({
 						capabilities = require("cmp_nvim_lsp").default_capabilities(),
 					})
-				end
-			end
+				end,
+			})
 		end,
 	},
-	{ "onsails/lspkind.nvim" },
-	{ "windwp/nvim-autopairs", config = true },
+	{ "onsails/lspkind.nvim", event = "InsertEnter" },
+	{ "windwp/nvim-autopairs", event = "InsertEnter" },
 	{
 		"hrsh7th/nvim-cmp",
+		event = "InsertCharPre",
 		config = function()
 			local cmp = require("cmp")
 			local lspkind = require("lspkind")
@@ -82,6 +65,7 @@ return {
 	},
 	{
 		"ray-x/lsp_signature.nvim",
+		event = "LspAttach",
 		opts = {
 			bind = true,
 			floating_window = true,
@@ -93,9 +77,10 @@ return {
 			extra_trigger_chars = { "(", "," }, -- Auto-trigger on these characters}
 		},
 	},
-	{ "lukas-reineke/indent-blankline.nvim" },
+	{ "lukas-reineke/indent-blankline.nvim", event = "BufReadPre" },
 	{
 		"L3MON4D3/LuaSnip",
+		event = "InsertCharPre",
 		build = "make install_jsregexp",
 		config = function()
 			require("luasnip.loaders.from_vscode").lazy_load()

@@ -25,4 +25,13 @@ vim.cmd([[set cmdheight=0]]) -- hide command bar when unused
 vim.cmd([[set laststatus=3]]) -- global status
 vim.cmd([[set clipboard+=unnamedplus]]) -- use system clipboard when yanking and stuff
 
+if vim.g.neovide then
+	vim.keymap.set("n", "<C-Tab>", "<cmd>BufferLineCycleNext<CR>", {})
+	vim.g.neovide_title_background_color = "#11111b"
+	vim.g.neovide_refresh_rate = 165
+	vim.o.guifont = "JetBrainsMono Nerd Font:h11"
+	vim.g.neovide_cursor_smooth_blink = true
+	vim.g.neovide_cursor_vfx_mode = "pixiedust"
+end
+
 require("keymaps")

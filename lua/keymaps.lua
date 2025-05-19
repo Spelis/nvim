@@ -4,31 +4,20 @@ local vim = vim
 local km = vim.keymap.set -- i learnt to use vim search and replace while changing everything from keymap.set to km
 
 wk.add({
-	{ "<leader>t", group = "Toggle" },
 	{ "<leader>q", group = "Quit" },
 	{ "<leader>b", group = "Buffers" },
 	{ "<leader>f", group = "Find" },
-	{ "<leader>bq", group = "Close Buffer" },
 })
 
 -- keybinds
 km("n", ";", ":", { desc = "Run Command" })
 km("n", "<Esc>", "<cmd>noh<CR>")
 
-km("n", "<leader>tt", "<cmd>ToggleTerm direction=float<CR>i", { desc = "Toggle Terminal" })
-
-km("n", "<leader>qq", "<cmd>wq<CR>", { desc = "Quit Nvim" })
-km("n", "<leader>qb", "<cmd>bdelete<CR>", { desc = "Close current buffer" })
+km("n", "<leader><CR>", "<cmd>ToggleTerm direction=float<CR>", { desc = "Floating Terminal" })
 
 km("n", "<leader>bn", "<cmd>ene<CR>", { desc = "Create new file" })
-km("n", "<leader>bd", "<cmd>Dashboard<CR>", { desc = "Go back to Dashboard" })
-km("n", "<leader>bpv", "<cmd>VenvSelect<CR>", { desc = "Select Python Interpreter" })
 km("n", "<leader>bw", "<cmd>w<CR>", { desc = "Write Buffer" })
-
-km("n", "<leader>bqs", "<cmd>BufferLinePickClose<CR>", { desc = "Select buffer to close" })
-km("n", "<leader>bqc", "<cmd>bdelete<CR>", { desc = "Close current buffer" })
-km("n", "<leader>bqr", "<cmd>BufferLineCloseRight", { desc = "Close all buffers to the right" })
-km("n", "<leader>bql", "<cmd>BufferLineCloseLeft", { desc = "Close all buffers to the left" })
+km("n", "<leader>bq", "<cmd>bdelete<CR>", { desc = "Close Buffer" })
 
 km("n", "<C-s>", "<cmd>w<CR>", { desc = "Save current buffer" })
 km("i", "<C-s>", "<Esc><cmd>w<CR>a", { desc = "Save current buffer" })
@@ -39,18 +28,17 @@ km("n", "<leader>fr", fzf.oldfiles, { desc = "Telescope Recent Files" })
 km("n", "<leader>fp", "<cmd>Telescope projects<CR>", { desc = "Telescope Recent Projects" })
 km("n", "<leader>ft", fzf.live_grep, { desc = "Telescope Find Text" })
 km("n", "<leader>fd", "<cmd>Telescope diagnostics<CR>", { desc = "Telescope Diagnostics" })
+km("n", "<leader>fo", "<cmd>Oil<CR>", { desc = "File Explorer" })
 km("n", "<leader>fs", fzf.lsp_document_symbols, { desc = "Telescope symbols" })
+km("n", "<leader>fS", fzf.lsp_workspace_symbols, { desc = "Telescope Workspace Symbols" })
 
-local bufferlineopts = { noremap = true, silent = true }
+local function toggle_diffview()
+	local view = require("diffview.lib").get_current_view()
+	if view then
+		vim.cmd("DiffviewClose")
+	else
+		vim.cmd("DiffviewOpen")
+	end
+end
 
-km("n", "<C-b>n", "<cmd>BufferLineCycleNext<CR>", bufferlineopts)
-km("n", "<C-b>p", "<cmd>BufferLineCyclePrev<CR>", bufferlineopts)
-km("n", "<C-b>l", "<cmd>BufferLineMoveNext<CR>", bufferlineopts)
-km("n", "<C-b>h", "<cmd>BufferLineMovePrev<CR>", bufferlineopts)
-km("n", "<C-b>ss", "<cmd>BufferLinePick<CR>", bufferlineopts)
-km("n", "<C-b>sq", "<cmd>BufferLinePickClose<CR>", bufferlineopts)
-km("n", "<C-b>q", "<cmd>bdelete<CR>", bufferlineopts)
-km("n", "<C-b>o", "<cmd>BufferLineCloseOthers<CR>", bufferlineopts)
-
-km("n", "<C-e>", "<cmd>Oil<CR>", { desc = "Toggle Oil" })
-km("i", "<C-e>", "<Esc><cmd>Oil<CR>", { desc = "Toggle Oil" })
+km("n", "<leader>gd", toggle_diffview, { desc = "Toggle Git Diff View" })
