@@ -1,7 +1,7 @@
 local fzf = require("telescope.builtin")
 local wk = require("which-key")
 local vim = vim
-local km = vim.keymap.set -- i learnt to use vim search and replace while changing everything from keymap.set to km
+local km = vim.keymap.set
 
 wk.add({
 	{ "<leader>q", group = "Quit" },
@@ -12,6 +12,7 @@ wk.add({
 -- keybinds
 km("n", ";", ":", { desc = "Run Command" })
 km("n", "<Esc>", "<cmd>noh<CR>")
+km("n", "<leader>?", "<cmd>WhichKey<CR>")
 
 km("n", "<leader><CR>", "<cmd>ToggleTerm direction=float<CR>", { desc = "Floating Terminal" })
 
@@ -42,3 +43,5 @@ local function toggle_diffview()
 end
 
 km("n", "<leader>gd", toggle_diffview, { desc = "Toggle Git Diff View" })
+
+km("n", "<C-Tab>", "<cmd>BufferLineCycleNext<CR>", { desc = "Cycle Tabs" })

@@ -1,3 +1,4 @@
+local vim = vim
 vim.g.mapleader = " "
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -26,12 +27,15 @@ vim.cmd([[set laststatus=3]]) -- global status
 vim.cmd([[set clipboard+=unnamedplus]]) -- use system clipboard when yanking and stuff
 
 if vim.g.neovide then
-	vim.keymap.set("n", "<C-Tab>", "<cmd>BufferLineCycleNext<CR>", {})
-	vim.g.neovide_title_background_color = "#11111b"
+	vim.g.neovide_title_background_color = "#11111b" -- windows only
 	vim.g.neovide_refresh_rate = 165
 	vim.o.guifont = "JetBrainsMono Nerd Font:h11"
 	vim.g.neovide_cursor_smooth_blink = true
 	vim.g.neovide_cursor_vfx_mode = "pixiedust"
+	vim.g.neovide_cursor_vfx_particle_density = 10
+	vim.g.neovide_floating_corner_radius = 10.0
+	vim.g.neovide_floating_blur_amount_x = 8.0
+	vim.g.neovide_floating_blur_amount_y = 8.0
 end
 
 require("keymaps")

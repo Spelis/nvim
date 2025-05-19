@@ -1,34 +1,64 @@
 return {
 	{ "williamboman/mason.nvim", build = ":MasonUpdate", config = true },
-	{ "neovim/nvim-lspconfig", event = "VeryLazy" },
-	{ "Bekaboo/dropbar.nvim", lazy = true },
-	{ "hrsh7th/cmp-nvim-lsp", event = "InsertEnter" },
+	{
+		"neovim/nvim-lspconfig",
+		lazy = true,
+		event = "BufReadPre",
+	},
+	{
+		"linux-cultist/venv-selector.nvim",
+		dependencies = { "neovim/nvim-lspconfig", "nvim-telescope/telescope.nvim", "mfussenegger/nvim-dap-python" },
+		opts = {},
+		branch = "regexp",
+		event = "VeryLazy", -- Optional: needed only if you want to type `:VenvSelect` without a keymapping
+		cmd = { "VenvSelect" },
+	},
+	{
+		"hrsh7th/cmp-nvim-lsp",
+		lazy = true,
+		event = "BufReadPre",
+	},
 	{
 		"williamboman/mason-lspconfig.nvim",
-		event = "BufReadPre", -- delay LSP stuff until a file is opened
-		dependencies = { "williamboman/mason.nvim" },
+		event = "BufEnter",
+		dependencies = {
+			"williamboman/mason.nvim",
+			"neovim/nvim-lspconfig",
+			"hrsh7th/cmp-nvim-lsp",
+		},
 		config = function()
 			local mason_lsp = require("mason-lspconfig")
-			mason_lsp.setup({
-				-- keep your config
-			})
+			mason_lsp.setup()
 
 			local lspconfig = require("lspconfig")
+			local lspopts = {
+				capabilities = require("cmp_nvim_lsp").default_capabilities(),
+				handlers = {
+					["textDocument/signatureHelp"] = function()
+						return
+					end,
+				},
+			}
 
-			mason_lsp.setup_handlers({
-				function(server_name)
-					lspconfig[server_name].setup({
-						capabilities = require("cmp_nvim_lsp").default_capabilities(),
-					})
-				end,
-			})
+			if mason_lsp.setup_handlers then
+				mason_lsp.setup_handlers({
+					function(server_name)
+						lspconfig[server_name].setup(lspopts)
+					end,
+				})
+			else
+				for _, server_name in ipairs(mason_lsp.get_installed_servers()) do
+					lspconfig[server_name].setup(lspopts)
+				end
+			end
 		end,
 	},
+	{ "Bekaboo/dropbar.nvim", lazy = true, config = true },
 	{ "onsails/lspkind.nvim", event = "InsertEnter" },
-	{ "windwp/nvim-autopairs", event = "InsertEnter" },
+	{ "windwp/nvim-autopairs", lazy = false, config = true },
 	{
 		"hrsh7th/nvim-cmp",
-		event = "InsertCharPre",
+		event = "BufEnter",
 		config = function()
 			local cmp = require("cmp")
 			local lspkind = require("lspkind")
@@ -51,36 +81,20 @@ return {
 					-- documentation = cmp.config.window.bordered { border = "single" },
 				},
 				formatting = {
-					format = lspkind.cmp_format({
-						mode = "symbol_text",
-						menu = {
-							nvim_lsp = "[LSP]",
-							buffer = "[Buffer]",
-							path = "[Path]",
-						},
-					}),
+					format = function(entry, vim_item)
+						local sym = require("lspkind").presets.default[vim_item.kind] or ""
+						vim_item.abbr = sym .. " " .. vim_item.abbr
+						vim_item.kind = ""
+						return vim_item
+					end,
 				},
 			})
 		end,
 	},
-	{
-		"ray-x/lsp_signature.nvim",
-		event = "LspAttach",
-		opts = {
-			bind = true,
-			floating_window = true,
-			handler_opts = {
-				border = "none",
-			},
-			toggle_key = "<C-d>", -- Toggle signature help
-			hint_enable = false,
-			extra_trigger_chars = { "(", "," }, -- Auto-trigger on these characters}
-		},
-	},
 	{ "lukas-reineke/indent-blankline.nvim", event = "BufReadPre" },
 	{
 		"L3MON4D3/LuaSnip",
-		event = "InsertCharPre",
+		event = "InsertEnter",
 		build = "make install_jsregexp",
 		config = function()
 			require("luasnip.loaders.from_vscode").lazy_load()
