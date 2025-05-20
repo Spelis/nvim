@@ -26,7 +26,7 @@ return {
 						"filename",
 						file_status = true,
 						newfile_status = true,
-						path = 3,
+						path = 1,
 						symbols = {
 							modified = "*",
 							readonly = "!",

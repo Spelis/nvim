@@ -20,7 +20,7 @@ return {
 	},
 	{
 		"williamboman/mason-lspconfig.nvim",
-		event = "BufEnter",
+		event = "BufReadPre",
 		dependencies = {
 			"williamboman/mason.nvim",
 			"neovim/nvim-lspconfig",
@@ -53,7 +53,20 @@ return {
 			end
 		end,
 	},
-	{ "Bekaboo/dropbar.nvim", lazy = true, config = true },
+	{
+		"Bekaboo/dropbar.nvim",
+		-- optional, but required for fuzzy finder support
+		dependencies = {
+			"nvim-telescope/telescope-fzf-native.nvim",
+			build = "make",
+		},
+		config = function()
+			local dropbar_api = require("dropbar.api")
+			vim.keymap.set("n", "<Leader>;", dropbar_api.pick, { desc = "Pick symbols in winbar" })
+			vim.keymap.set("n", "[;", dropbar_api.goto_context_start, { desc = "Go to start of current context" })
+			vim.keymap.set("n", "];", dropbar_api.select_next_context, { desc = "Select next context" })
+		end,
+	},
 	{ "onsails/lspkind.nvim", event = "InsertEnter" },
 	{ "windwp/nvim-autopairs", lazy = false, config = true },
 	{
@@ -81,12 +94,9 @@ return {
 					-- documentation = cmp.config.window.bordered { border = "single" },
 				},
 				formatting = {
-					format = function(entry, vim_item)
-						local sym = require("lspkind").presets.default[vim_item.kind] or ""
-						vim_item.abbr = sym .. " " .. vim_item.abbr
-						vim_item.kind = ""
-						return vim_item
-					end,
+					format = lspkind.cmp_format({
+						mode = "symbol",
+					}),
 				},
 			})
 		end,

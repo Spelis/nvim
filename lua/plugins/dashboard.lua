@@ -79,7 +79,14 @@ return {
 			bypass_save_filetype = { "dashboard" },
 		},
 	},
-	{ "spelis/project.nvim", event = "BufReadPre" },
+	{
+		"spelis/project.nvim",
+		event = "VimEnter",
+		config = function()
+			require("project_nvim").setup()
+			require("telescope").load_extension("projects")
+		end,
+	},
 
 	{
 		"folke/snacks.nvim",
