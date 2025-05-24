@@ -8,6 +8,7 @@ return {
 				javascript = { "prettierd", "prettier" },
 				html = { "prettierd", "prettier", "htmlbeautifier" },
 				htmldjango = { "prettierd", "prettier", "htmlbeautifier", "djlint" },
+				rust = { "rustfmt" },
 			},
 		})
 		vim.api.nvim_create_autocmd("BufWritePre", {

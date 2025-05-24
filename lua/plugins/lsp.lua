@@ -28,28 +28,20 @@ return {
 		},
 		config = function()
 			local mason_lsp = require("mason-lspconfig")
-			mason_lsp.setup()
 
 			local lspconfig = require("lspconfig")
 			local lspopts = {
 				capabilities = require("cmp_nvim_lsp").default_capabilities(),
 				handlers = {
-					["textDocument/signatureHelp"] = function()
-						return
-					end,
+					["textDocument/signatureHelp"] = vim.lsp.with(
+						vim.lsp.handlers.signature_help,
+						{ border = "rounded" } -- or "single", "shadow", etc.
+					),
 				},
 			}
 
-			if mason_lsp.setup_handlers then
-				mason_lsp.setup_handlers({
-					function(server_name)
-						lspconfig[server_name].setup(lspopts)
-					end,
-				})
-			else
-				for _, server_name in ipairs(mason_lsp.get_installed_servers()) do
-					lspconfig[server_name].setup(lspopts)
-				end
+			for _, server_name in ipairs(mason_lsp.get_installed_servers()) do
+				lspconfig[server_name].setup(lspopts)
 			end
 		end,
 	},
@@ -67,6 +59,7 @@ return {
 			vim.keymap.set("n", "];", dropbar_api.select_next_context, { desc = "Select next context" })
 		end,
 	},
+
 	{ "onsails/lspkind.nvim", event = "InsertEnter" },
 	{ "windwp/nvim-autopairs", lazy = false, config = true },
 	{
@@ -97,6 +90,10 @@ return {
 					format = lspkind.cmp_format({
 						mode = "symbol",
 					}),
+				},
+				preselect = cmp.PreselectMode.Item,
+				completion = {
+					completeopt = "menu,menuone,noinsert",
 				},
 			})
 		end,

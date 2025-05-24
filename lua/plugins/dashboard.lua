@@ -66,7 +66,7 @@ footer = function()
 	return "\n" .. message
 end
 
-local username = os.getenv("USER") or os.getenv("USERNAME")
+local username = os.getenv("USER") or os.getenv("USERNAME") or "?"
 username = username:gsub("^%l", string.upper)
 local greet = get_greeting() .. ", " .. username .. "!"
 
