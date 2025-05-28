@@ -5,12 +5,17 @@ return {
 		dependencies = { "nvim-lua/plenary.nvim" },
 		opts = {
 			defaults = {
-				layout_strategy = "vertical",
+				-- layout_strategy = "vertical",
 				layout_config = {
 					width = 0.9,
 					height = 0.85,
 					preview_cutoff = 120,
 					prompt_position = "top",
+				},
+				pickers = {
+					find_files = {
+						hidden = true,
+					},
 				},
 				sorting_strategy = "ascending",
 				winblend = 10,

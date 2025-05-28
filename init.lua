@@ -1,5 +1,6 @@
 local vim = vim
 vim.g.mapleader = " "
+vim.g.maplocalleader = ","
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -19,12 +20,19 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup("plugins")
 
-vim.cmd([[set number]])
-vim.cmd([[set relativenumber]])
-vim.cmd([[colorscheme catppuccin-mocha]])
-vim.cmd([[set cmdheight=0]]) -- hide command bar when unused
-vim.cmd([[set laststatus=3]]) -- global status
-vim.cmd([[set clipboard+=unnamedplus]]) -- use system clipboard when yanking and stuff
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.cmd.colorscheme("catppuccin-mocha")
+vim.opt.cmdheight = 0 -- Hide command bar when unused.
+vim.opt.laststatus = 3 -- Global status.
+vim.opt.mouse = "a"
+vim.opt.cursorline = true
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
+vim.opt.smartindent = true
+vim.opt.signcolumn = "yes"
+vim.cmd([[set clipboard+=unnamedplus]]) -- Use system clipboard when yanking and stuff.
 
 if vim.g.neovide then
 	vim.g.neovide_title_background_color = "#11111b" -- windows only

@@ -19,6 +19,7 @@ km("n", "<leader><CR>", "<cmd>ToggleTerm direction=float<CR>", { desc = "Floatin
 km("n", "<leader>bn", "<cmd>ene<CR>", { desc = "Create new file" })
 km("n", "<leader>bw", "<cmd>w<CR>", { desc = "Write Buffer" })
 km("n", "<leader>bq", "<cmd>bdelete<CR>", { desc = "Close Buffer" })
+km("n", "<leader>bd", "<cmd>lua require'snacks'.dashboard()<CR>", { desc = "Open Dashboard" })
 
 km("n", "<C-s>", "<cmd>w<CR>", { desc = "Save current buffer" })
 km("i", "<C-s>", "<Esc><cmd>w<CR>a", { desc = "Save current buffer" })
