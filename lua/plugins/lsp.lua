@@ -4,17 +4,30 @@ return {
 		"neovim/nvim-lspconfig",
 		lazy = true,
 	},
+	{ "allaman/emoji.nvim", opts = true },
+	{
+		"nvim-dap",
+		event = "BufReadPre",
+		cond = function()
+			return vim.bo.buftype == "" and vim.bo.filetype ~= ""
+		end,
+	},
+	{
+		"nvim-dap-python",
+		dependencies = { "nvim-dap" },
+		lazy = true,
+	},
 	{
 		"linux-cultist/venv-selector.nvim",
 		dependencies = { "neovim/nvim-lspconfig", "nvim-telescope/telescope.nvim", "mfussenegger/nvim-dap-python" },
-		opts = true,
 		branch = "regexp",
-		event = "VeryLazy", -- Optional: needed only if you want to type `:VenvSelect` without a keymapping
+		event = "BufReadpre", -- Optional: needed only if you want to type `:VenvSelect` without a key mapping
 		cmd = { "VenvSelect" },
 	},
 	{
 		"hrsh7th/cmp-nvim-lsp",
 		lazy = true,
+		opts = true,
 	},
 	{
 		"williamboman/mason-lspconfig.nvim",
@@ -22,31 +35,36 @@ return {
 		dependencies = {
 			"williamboman/mason.nvim",
 			"neovim/nvim-lspconfig",
-			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-nvim-lsp", -- still needed
 		},
 		config = function()
 			local mason_lsp = require("mason-lspconfig")
-
 			local lspconfig = require("lspconfig")
-			local lspopts = {
-				capabilities = require("cmp_nvim_lsp").default_capabilities(),
-				handlers = {
-					["textDocument/signatureHelp"] = vim.lsp.with( -- vim.lsp.with & vim.lsp.handlers.signature_help are both deprecated. i have no idea what the
-						vim.lsp.handlers.signature_help, --       alternatives are. if anyone wants to help, go for it.
-						{ border = "rounded" } -- or "single", "shadow", etc.
-					),
-				},
+
+			-- Only require cmp_nvim_lsp if cmp is available
+			local has_cmp, cmp_lsp = pcall(require, "cmp_nvim_lsp")
+			local capabilities = vim.lsp.protocol.make_client_capabilities()
+
+			if has_cmp then
+				capabilities = cmp_lsp.default_capabilities(capabilities)
+			end
+
+			local handlers = {
+				["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" }),
 			}
 
 			for _, server_name in ipairs(mason_lsp.get_installed_servers()) do
-				lspconfig[server_name].setup(lspopts)
+				lspconfig[server_name].setup({
+					capabilities = capabilities,
+					handlers = handlers,
+				})
 			end
 		end,
 	},
 	{
 		"Bekaboo/dropbar.nvim",
 		event = "BufReadPost",
-		-- optional, but required for fuzzy finder support
+		-- Optional, but required for fuzzy finder support
 		dependencies = {
 			"nvim-telescope/telescope-fzf-native.nvim",
 			build = "make",
@@ -60,10 +78,14 @@ return {
 	},
 
 	{ "onsails/lspkind.nvim", event = "InsertEnter" },
-	{ "windwp/nvim-autopairs", lazy = false, config = true },
+	{
+		"windwp/nvim-autopairs",
+		lazy = true,
+		config = true,
+	},
 	{
 		"hrsh7th/nvim-cmp",
-		event = "BufReadPre",
+		event = "InsertEnter",
 		config = function()
 			local cmp = require("cmp")
 			local lspkind = require("lspkind")
@@ -78,17 +100,17 @@ return {
 					{ name = "buffer" },
 					{ name = "path" },
 					{ name = "luasnip" },
+					{ name = "emoji" },
 				}),
 				experimental = {
 					ghost_text = true, -- VSCode-like inline ghost text
 				},
 				window = {
-					-- completion = cmp.config.window.bordered { border = "single" },
-					-- documentation = cmp.config.window.bordered { border = "single" },
 					completion = {
 						col_offset = 1,
 						side_padding = 0,
 					},
+					-- documentation = cmp.config.window.bordered({ border = "rounded" }),
 				},
 				formatting = {
 					fields = { "kind", "abbr" },
@@ -103,11 +125,9 @@ return {
 						local base_group = "CmpItemKind" .. text
 						local custom_group = "MyCmpKindWhite" .. text
 
-						-- Pull background from base group
 						local hl = vim.api.nvim_get_hl(0, { name = base_group }) or {}
 						local bg = vim.api.nvim_get_hl(0, { name = "Pmenu" }) or {}
 
-						-- Set custom highlight (caches itself, no overwrite)
 						if vim.fn.hlID(custom_group) == 0 then
 							vim.api.nvim_set_hl(0, custom_group, { fg = bg.bg, bg = hl.fg })
 						end
@@ -129,11 +149,9 @@ return {
 	},
 	{
 		"folke/lazydev.nvim",
-		ft = "lua", -- only load on lua files
+		ft = "lua", -- only load on Lua files
 		opts = {
 			library = {
-				-- See the configuration section for more details
-				-- Load luvit types when the `vim.uv` word is found
 				{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
 			},
 		},
@@ -178,4 +196,5 @@ return {
 			}
 		end,
 	},
+	{ "chrisgrieser/nvim-puppeteer", lazy = false },
 }

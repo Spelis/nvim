@@ -4,7 +4,6 @@ return {
 		dependencies = {
 			"nvim-tree/nvim-web-devicons",
 		},
-		event = "BufReadPre",
 		opts = {
 			options = {
 				component_separators = { left = "|", right = "|" },

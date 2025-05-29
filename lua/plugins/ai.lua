@@ -1,7 +1,7 @@
 return {
 	{
 		"frankroeder/parrot.nvim",
-		event = "VimEnter",
+		event = "BufReadPre",
 		opts = {
 			providers = {
 				ollama = {

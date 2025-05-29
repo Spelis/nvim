@@ -1,14 +1,17 @@
 return {
 	{
-		"andweeb/presence.nvim",
+		"IogaMaster/neocord",
 		opts = {
-			auto_update = true,
-			neovim_image_text = "The One True Text Editor",
-			main_image = "neovim",
-			client_id = "793271441293967371",
+			logo = "auto",
+			logo_tooltip = nil,
+			main_image = "language",
+			client_id = "1157438221865717891",
 			log_level = nil,
-			enable_line_number = false,
+			debounce_timeout = 10,
+			blacklist = {},
+			file_assets = {},
 			show_time = true,
+			global_timer = false,
 
 			editing_text = "Editing %s",
 			file_explorer_text = "Browsing %s",
@@ -17,6 +20,7 @@ return {
 			reading_text = "Reading %s",
 			workspace_text = "Working on %s",
 			line_number_text = "Line %s out of %s",
+			terminal_text = "Using Terminal",
 		},
 	},
 }

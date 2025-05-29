@@ -2,6 +2,7 @@ local vim = vim
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 
+-- Bootstrap Lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
 	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
@@ -22,7 +23,6 @@ require("lazy").setup("plugins")
 
 vim.opt.number = true
 vim.opt.relativenumber = true
-vim.cmd.colorscheme("catppuccin-mocha")
 vim.opt.cmdheight = 0 -- Hide command bar when unused.
 vim.opt.laststatus = 3 -- Global status.
 vim.opt.mouse = "a"
