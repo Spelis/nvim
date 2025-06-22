@@ -2,8 +2,8 @@ return {
 	{
 		"IogaMaster/neocord",
 		opts = {
-			logo = "auto",
-			logo_tooltip = nil,
+			logo = "https://icons.iconarchive.com/icons/papirus-team/papirus-apps/512/nvim-icon.png",
+			logo_tooltip = "NeoVim",
 			main_image = "language",
 			client_id = "1157438221865717891",
 			log_level = nil,
@@ -14,7 +14,7 @@ return {
 			global_timer = false,
 
 			editing_text = "Editing %s",
-			file_explorer_text = "Browsing %s",
+			file_explorer_text = "Browsing Files",
 			git_commit_text = "Committing changes",
 			plugin_manager_text = "Managing plugins",
 			reading_text = "Reading %s",

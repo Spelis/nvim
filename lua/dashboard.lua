@@ -17,7 +17,11 @@ end
 
 local username = os.getenv("USER") or os.getenv("USERNAME") or "?"
 username = username:gsub("^%l", string.upper)
-local greet = get_greeting() .. ", " .. username .. "!"
+if username then
+	greet = get_greeting() .. ", " .. username .. "!"
+else
+	greet = get_greeting()
+end
 
 footer = function()
 	local messages = {
@@ -30,7 +34,6 @@ footer = function()
 		random_char_append(random_char_append(random_char_append("", "vc"), "ia"), "\"'[({`"),
 		"not brain.exists == True",
 		"The one true text editor.",
-		" Comes with Telescope!",
 		'"Write programs that do one thing and do it well." - Unix philosophy',
 		"NVidia, Fuck you. ",
 		"Did you mean 'emacs'?",
@@ -55,6 +58,7 @@ footer = function()
 		"Just pushed to main. YOLO!",
 		"daw",
 		"yyp",
+		"Oil.nvim comes with SSH, btw.",
 		random_char_append("g", "Uu") .. "iw",
 		"zz",
 		"the config provider was too lazy to put a quote here, ignore me.",
@@ -85,12 +89,6 @@ return {
 				desc = "Restore Session            ",
 				key = "s",
 				action = ":SessionRestore",
-			},
-			{
-				icon = "󰚰 ",
-				desc = "Project Browser            ",
-				key = "p",
-				action = ":Telescope projects",
 			},
 			{
 				icon = "󰒲 ",

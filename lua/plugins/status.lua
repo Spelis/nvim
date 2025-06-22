@@ -4,6 +4,7 @@ return {
 		dependencies = {
 			"nvim-tree/nvim-web-devicons",
 		},
+		event = { "BufReadPre", "BufNewFile" },
 		opts = {
 			options = {
 				component_separators = { left = "|", right = "|" },
@@ -15,7 +16,17 @@ return {
 					{
 						"mode",
 						fmt = function(res)
-							return res:sub(1, 1)
+							local replace = {
+								COMMAND = "C",
+								NORMAL = "N",
+								INSERT = "I",
+								VISUAL = "V",
+								["V-BLOCK"] = "VB",
+								["V-LINE"] = "VL",
+								TERMINAL = "T",
+								REPLACE = "R",
+							}
+							return replace[res] or res -- Replace with shorthand, or if there is none, use full name (for debug purposes, should be complete)
 						end,
 					},
 				},
@@ -27,10 +38,10 @@ return {
 						newfile_status = true,
 						path = 1,
 						symbols = {
-							modified = "*",
-							readonly = "!",
+							modified = "●",
+							readonly = "",
 							unnamed = "Unnamed",
-							newfile = "@",
+							newfile = "",
 						},
 					},
 				},

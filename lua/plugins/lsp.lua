@@ -1,28 +1,8 @@
 return {
-	{ "williamboman/mason.nvim", build = ":MasonUpdate", config = true },
+	{ "williamboman/mason.nvim", build = ":MasonUpdate", config = true, event = { "BufReadPre", "BufNewFile" } },
 	{
 		"neovim/nvim-lspconfig",
 		lazy = true,
-	},
-	{ "allaman/emoji.nvim", opts = true },
-	{
-		"nvim-dap",
-		event = "BufReadPre",
-		cond = function()
-			return vim.bo.buftype == "" and vim.bo.filetype ~= ""
-		end,
-	},
-	{
-		"nvim-dap-python",
-		dependencies = { "nvim-dap" },
-		lazy = true,
-	},
-	{
-		"linux-cultist/venv-selector.nvim",
-		dependencies = { "neovim/nvim-lspconfig", "nvim-telescope/telescope.nvim", "mfussenegger/nvim-dap-python" },
-		branch = "regexp",
-		event = "BufReadpre", -- Optional: needed only if you want to type `:VenvSelect` without a key mapping
-		cmd = { "VenvSelect" },
 	},
 	{
 		"hrsh7th/cmp-nvim-lsp",
@@ -64,11 +44,6 @@ return {
 	{
 		"Bekaboo/dropbar.nvim",
 		event = "BufReadPost",
-		-- Optional, but required for fuzzy finder support
-		dependencies = {
-			"nvim-telescope/telescope-fzf-native.nvim",
-			build = "make",
-		},
 		config = function()
 			local dropbar_api = require("dropbar.api")
 			vim.keymap.set("n", "<Leader>;", dropbar_api.pick, { desc = "Pick symbols in winbar" })
@@ -82,6 +57,7 @@ return {
 		"windwp/nvim-autopairs",
 		lazy = true,
 		config = true,
+		event = { "BufReadPre", "BufNewFile" },
 	},
 	{
 		"hrsh7th/nvim-cmp",
@@ -167,7 +143,7 @@ return {
 	{ "lukas-reineke/headlines.nvim", lazy = true, ft = "markdown", config = true },
 	{
 		"echasnovski/mini.ai",
-		event = "VeryLazy",
+		event = { "BufReadPre", "BufNewFile" },
 		opts = function()
 			local ai = require("mini.ai")
 			return {
@@ -196,5 +172,4 @@ return {
 			}
 		end,
 	},
-	{ "chrisgrieser/nvim-puppeteer", lazy = false },
 }

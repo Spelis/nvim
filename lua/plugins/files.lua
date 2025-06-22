@@ -10,7 +10,7 @@ return {
 				["<C-s>"] = { "<Esc><cmd>w<CR>" },
 			},
 		},
-		dependencies = { { "echasnovski/mini.icons", opts = {} } },
+		dependencies = { "nvim-tree/nvim-web-devicons" },
 		cmd = "Oil",
 	},
 }
