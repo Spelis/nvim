@@ -13,6 +13,8 @@ km("n", ";", ":", { desc = "Run Command" })
 km("n", "<Esc>", "<cmd>noh<CR>")
 km("n", "<leader>?", "<cmd>WhichKey<CR>")
 
+km("n", "<leader><CR>", "<cmd>ToggleTerm direction=float<CR>", { desc = "Floating Terminal" })
+
 km("n", "<leader>bn", "<cmd>ene<CR>", { desc = "Create new file" })
 km("n", "<leader>bw", "<cmd>w<CR>", { desc = "Write Buffer" })
 km("n", "<leader>bq", "<cmd>bdelete<CR>", { desc = "Close Buffer" })
