@@ -1,7 +1,8 @@
 return {
 	{
 		"rmagatti/auto-session",
-		cmd = "SessionRestore",
+		cmd = { "SessionRestore" },
+		event = { "BufEnter", "InsertLeavePre", "InsertEnter", "VeryLazy" },
 		opts = {
 			auto_save = true,
 			auto_restore = false,

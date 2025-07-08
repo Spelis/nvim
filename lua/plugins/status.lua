@@ -4,7 +4,7 @@ return {
 		dependencies = {
 			"nvim-tree/nvim-web-devicons",
 		},
-		event = { "BufReadPre", "BufNewFile" },
+		event = { "BufReadPre", "BufNewFile", "BufEnter", "BufWinEnter" },
 		opts = {
 			options = {
 				component_separators = { left = "|", right = "|" },
