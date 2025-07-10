@@ -1,19 +1,5 @@
 return {
 	{
-		"j-hui/fidget.nvim",
-		opts = {},
-		lazy = true,
-		init = function()
-			local lazy_notify = vim.notify
-			vim.notify = function(...)
-				-- Load plugin just before first notify
-				require("lazy").load({ plugins = { "fidget.nvim" } })
-				vim.notify = lazy_notify
-				return vim.notify(...)
-			end
-		end,
-	},
-	{
 		"folke/snacks.nvim",
 		priority = 1000,
 		opts = {
