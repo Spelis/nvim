@@ -6,10 +6,9 @@ wk.add({
 	{ "<leader>q", group = "Quit" },
 	{ "<leader>b", group = "Buffers" },
 	{ "<leader>f", group = "Find" },
+	{ "<leader>g", group = "Git" },
 })
 
--- keybinds
-km("n", ";", ":", { desc = "Run Command" })
 km("n", "<Esc>", "<cmd>noh<CR>")
 km("n", "<leader>?", "<cmd>WhichKey<CR>")
 
@@ -23,8 +22,6 @@ km("n", "<leader>bd", "<cmd>lua require'snacks'.dashboard()<CR>", { desc = "Open
 km("n", "<C-s>", "<cmd>w<CR>", { desc = "Save current buffer" })
 km("i", "<C-s>", "<Esc><cmd>w<CR>a", { desc = "Save current buffer" })
 
-km("n", "<leader>fo", "<cmd>Oil<CR>", { desc = "File Explorer" })
-
 km("n", "D", vim.diagnostic.open_float, { desc = "Show diagnostics" })
 
 local function toggle_diffview()
@@ -37,5 +34,3 @@ local function toggle_diffview()
 end
 
 km("n", "<leader>gd", toggle_diffview, { desc = "Toggle Git Diff View" })
-
-km("n", "<C-Tab>", "<cmd>BufferLineCycleNext<CR>", { desc = "Cycle Tabs" })
