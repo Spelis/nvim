@@ -1,71 +1,48 @@
 return {
-	{ "williamboman/mason.nvim", build = ":MasonUpdate", config = true, event = { "BufReadPre", "BufNewFile" } },
-	{
-		"neovim/nvim-lspconfig",
-		lazy = true,
-	},
 	{
 		"hrsh7th/cmp-nvim-lsp",
-		lazy = true,
-		opts = true,
+		event = "VeryLazy",
 	},
-	{
-		"williamboman/mason-lspconfig.nvim",
-		event = "BufReadPre",
-		dependencies = {
-			"williamboman/mason.nvim",
-			"neovim/nvim-lspconfig",
-			"hrsh7th/cmp-nvim-lsp", -- still needed
-		},
-		config = function()
-			local mason_lsp = require("mason-lspconfig")
-			local lspconfig = require("lspconfig")
-
-			-- Only require cmp_nvim_lsp if cmp is available
-			local has_cmp, cmp_lsp = pcall(require, "cmp_nvim_lsp")
-			local capabilities = vim.lsp.protocol.make_client_capabilities()
-
-			if has_cmp then
-				capabilities = cmp_lsp.default_capabilities(capabilities)
-			end
-
-			local handlers = {
-				["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" }),
-			}
-
-			for _, server_name in ipairs(mason_lsp.get_installed_servers()) do
-				lspconfig[server_name].setup({
-					capabilities = capabilities,
-					handlers = handlers,
-				})
-			end
-		end,
-	},
-	{
-		"Bekaboo/dropbar.nvim",
-		event = "BufReadPost",
-		config = function()
-			local dropbar_api = require("dropbar.api")
-			vim.keymap.set("n", "<Leader>;", dropbar_api.pick, { desc = "Pick symbols in winbar" })
-			vim.keymap.set("n", "[;", dropbar_api.goto_context_start, { desc = "Go to start of current context" })
-			vim.keymap.set("n", "];", dropbar_api.select_next_context, { desc = "Select next context" })
-		end,
-	},
-
-	{ "onsails/lspkind.nvim", event = "InsertEnter" },
 	{
 		"windwp/nvim-autopairs",
 		lazy = true,
 		config = true,
-		event = { "BufReadPre", "BufNewFile" },
+		event = "InsertEnter",
+	},
+	{
+		"neovim/nvim-lspconfig",
+		config = function()
+			require("lspconfig")
+			local servers = { "basedpyright", "rust-analyzer", "lua_ls", "clangd", "html", "ts_ls" }
+			local capabilities = vim.lsp.protocol.make_client_capabilities()
+
+			vim.lsp.enable(servers)
+			vim.lsp.config("*", {
+				capabilities = capabilities,
+			})
+			-- Python
+			vim.lsp.config("basedpyright", {
+				capabilities = capabilities,
+				filetypes = { "python" },
+			})
+			-- Lua
+			vim.lsp.config("lua_ls", {
+				capabilities = capabilities,
+				filetypes = { "lua" },
+				workspace = {
+					maxPreload = 100,
+					preloadFileSize = 1000,
+				},
+			})
+		end,
 	},
 	{
 		"hrsh7th/nvim-cmp",
 		event = "InsertEnter",
+		dependencies = { "onsails/lspkind.nvim", "hrsh7th/cmp-buffer", "saadparwaiz1/cmp_luasnip", "hrsh7th/cmp-path" },
 		config = function()
 			local cmp = require("cmp")
 			local lspkind = require("lspkind")
-			local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 			cmp.setup({
 				mapping = cmp.mapping.preset.insert({
 					["<C-e>"] = cmp.mapping.abort(),
@@ -76,7 +53,6 @@ return {
 					{ name = "buffer" },
 					{ name = "path" },
 					{ name = "luasnip" },
-					{ name = "emoji" },
 				}),
 				experimental = {
 					ghost_text = true, -- VSCode-like inline ghost text
@@ -120,7 +96,6 @@ return {
 					completeopt = "menu,menuone,noinsert",
 				},
 			})
-			cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 		end,
 	},
 	{
@@ -140,7 +115,6 @@ return {
 			require("luasnip.loaders.from_vscode").lazy_load()
 		end,
 	},
-	{ "lukas-reineke/headlines.nvim", lazy = true, ft = "markdown", config = true },
 	{
 		"echasnovski/mini.ai",
 		event = { "BufReadPre", "BufNewFile" },
@@ -171,5 +145,16 @@ return {
 				},
 			}
 		end,
+	},
+	{
+		"windwp/nvim-ts-autotag",
+		ft = "html",
+		opts = {
+			opts = {
+				enable_close = true,
+				enable_rename = true,
+				enable_close_on_slash = false,
+			},
+		},
 	},
 }

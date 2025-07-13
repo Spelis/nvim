@@ -1,10 +1,8 @@
 return {
 	{
 		"nvim-lualine/lualine.nvim",
-		dependencies = {
-			"nvim-tree/nvim-web-devicons",
-		},
 		event = { "BufReadPre", "BufNewFile", "BufEnter", "BufWinEnter" },
+		dependencies = { "nvim-tree/nvim-web-devicons" },
 		opts = {
 			options = {
 				component_separators = { left = "|", right = "|" },
@@ -15,28 +13,35 @@ return {
 				lualine_a = {
 					{
 						"mode",
-						fmt = function(res)
-							local replace = {
-								COMMAND = "C",
+						fmt = function(mode)
+							local map = {
 								NORMAL = "N",
 								INSERT = "I",
 								VISUAL = "V",
-								["V-BLOCK"] = "VB",
 								["V-LINE"] = "VL",
-								TERMINAL = "T",
+								["V-BLOCK"] = "VB",
 								REPLACE = "R",
+								COMMAND = "C",
+								TERMINAL = "T",
 							}
-							return replace[res] or res -- Replace with shorthand, or if there is none, use full name (for debug purposes, should be complete)
+							return map[mode] or mode
 						end,
 					},
 				},
-				lualine_b = { "branch", "diff" },
+				lualine_b = {
+					{
+						function()
+							return vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
+						end,
+						icon = "",
+					},
+				},
 				lualine_c = {
 					{
 						"filename",
+						path = 1,
 						file_status = true,
 						newfile_status = true,
-						path = 1,
 						symbols = {
 							modified = "●",
 							readonly = "",
@@ -45,11 +50,9 @@ return {
 						},
 					},
 				},
-				lualine_x = {
-					"filetype",
-				},
-				lualine_y = { "diagnostics" },
-				lualine_z = { "location" },
+				lualine_x = { "filetype" },
+				lualine_y = { "branch", "diff", "diagnostics" },
+				lualine_z = {},
 			},
 		},
 	},
