@@ -6,14 +6,19 @@ return {
 			formatters_by_ft = {
 				lua = { "stylua" },
 				python = { "isort", "black" },
-				javascript = { "prettierd", "prettier" },
-				html = { "prettierd", "prettier", "htmlbeautifier" },
-				htmldjango = { "prettierd", "prettier", "htmlbeautifier", "djlint" },
 				rust = { "rustfmt" },
+
 				c = { "clang_format" },
 				cpp = { "clang_format" },
 				h = { "clang_format" },
 				hpp = { "clang_format" },
+
+				javascript = { "prettierd", "prettier" },
+				html = { "prettierd", "htmlbeautifier", "prettier" },
+				htmldjango = { "prettierd", "htmlbeautifier", "djlint", "prettier" },
+				-- bash = { "prettierd" },
+				-- zsh = { "prettierd" },
+				-- sh = { "prettierd" },
 			},
 			formatters = {
 				clang_format = {
@@ -37,19 +42,13 @@ return {
 						"tab_spaces=4",
 					},
 				},
-				prettier = {
-					prepend_args = {
-						"--use-tabs",
-						"--tab-width",
-						"4",
-					},
-				},
 				prettierd = {
 					prepend_args = {
 						"--use-tabs",
 						"--tab-width",
 						"4",
 					},
+					stdin = false,
 				},
 			},
 		})

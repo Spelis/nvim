@@ -29,9 +29,6 @@ return {
 		"folke/noice.nvim",
 		event = "CmdlineEnter",
 		opts = {
-			notify = {
-				enabled = false,
-			},
 			views = {
 				cmdline_popup = {
 					border = {

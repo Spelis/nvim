@@ -3,6 +3,8 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 
 vim.deprecate = function() end -- hide deprecation warnings, they're annoying as f**k
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 
 -- Bootstrap Lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"

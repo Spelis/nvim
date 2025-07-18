@@ -13,7 +13,7 @@ return {
 		"neovim/nvim-lspconfig",
 		config = function()
 			require("lspconfig")
-			local servers = { "basedpyright", "rust-analyzer", "lua_ls", "clangd", "html", "ts_ls" }
+			local servers = { "basedpyright", "rust_analyzer", "lua_ls", "clangd", "html", "ts_ls" }
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 			vim.lsp.enable(servers)
@@ -39,7 +39,13 @@ return {
 	{
 		"hrsh7th/nvim-cmp",
 		event = "InsertEnter",
-		dependencies = { "onsails/lspkind.nvim", "hrsh7th/cmp-buffer", "saadparwaiz1/cmp_luasnip", "hrsh7th/cmp-path" },
+		dependencies = {
+			"onsails/lspkind.nvim",
+			"saadparwaiz1/cmp_luasnip",
+			"hrsh7th/cmp-path",
+			"chrisgrieser/cmp-nerdfont",
+			"hrsh7th/cmp-emoji",
+		},
 		config = function()
 			local cmp = require("cmp")
 			local lspkind = require("lspkind")
@@ -50,52 +56,41 @@ return {
 				}),
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
-					{ name = "buffer" },
 					{ name = "path" },
 					{ name = "luasnip" },
+					{ name = "nerdfont" },
+					{ name = "emoji", option = { insert = false } },
 				}),
 				experimental = {
 					ghost_text = true, -- VSCode-like inline ghost text
-				},
-				window = {
-					completion = {
-						col_offset = 1,
-						side_padding = 0,
-					},
-					-- documentation = cmp.config.window.bordered({ border = "rounded" }),
 				},
 				formatting = {
 					fields = { "kind", "abbr" },
 					format = function(entry, vim_item)
 						local kind = lspkind.cmp_format({
-							mode = "symbol_text",
+							mode = "symbol",
 							maxwidth = 50,
 						})(entry, vim_item)
 						local strings = vim.split(kind.kind, "%s", { trimempty = true })
 						local icon = strings[1] or ""
 						local text = strings[2] or ""
-						local base_group = "CmpItemKind" .. text
-						local custom_group = "MyCmpKindWhite" .. text
-
-						local hl = vim.api.nvim_get_hl(0, { name = base_group }) or {}
-						local bg = vim.api.nvim_get_hl(0, { name = "Pmenu" }) or {}
-
-						if vim.fn.hlID(custom_group) == 0 then
-							vim.api.nvim_set_hl(0, custom_group, { fg = bg.bg, bg = hl.fg })
-						end
-
-						vim_item.kind = " " .. icon .. " "
-						vim_item.kind_hl_group = custom_group
-						vim_item.menu = "    (" .. text .. ")"
+						vim_item.kind = icon
+						vim_item.menu = "(" .. text .. ")"
 
 						return vim_item
 					end,
+				},
+				window = {
+					completion = cmp.config.window.bordered({ border = "single" }),
+					documentation = cmp.config.window.bordered({ border = "single" }),
 				},
 				preselect = cmp.PreselectMode.Item,
 				completion = {
 					completeopt = "menu,menuone,noinsert",
 				},
 			})
+
+			vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#313244", bg = nil })
 		end,
 	},
 	{
