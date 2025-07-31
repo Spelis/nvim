@@ -13,7 +13,7 @@ return {
 		"neovim/nvim-lspconfig",
 		config = function()
 			require("lspconfig")
-			local servers = { "basedpyright", "rust_analyzer", "lua_ls", "clangd", "html", "ts_ls" }
+			local servers = { "basedpyright", "jdtls", "rust_analyzer", "lua_ls", "clangd", "html", "ts_ls" }
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 			vim.lsp.enable(servers)
@@ -90,7 +90,7 @@ return {
 				},
 			})
 
-			vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#313244", bg = nil })
+			vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#7c6f64", bg = nil })
 		end,
 	},
 	{
@@ -103,8 +103,11 @@ return {
 		},
 	},
 	{
+		"saadparwaiz1/cmp_luasnip",
+		dependencies = { "L3MON4D3/LuaSnip" },
+	},
+	{
 		"L3MON4D3/LuaSnip",
-		event = "InsertEnter",
 		build = "make install_jsregexp",
 		config = function()
 			require("luasnip.loaders.from_vscode").lazy_load()

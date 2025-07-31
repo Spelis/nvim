@@ -39,7 +39,7 @@ return {
 				lualine_c = {
 					{
 						"filename",
-						path = 1,
+						path = 0,
 						file_status = true,
 						newfile_status = true,
 						symbols = {

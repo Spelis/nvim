@@ -1,3 +1,3 @@
 return {
-	{ "folke/which-key.nvim", opts = { preset = "helix", delay = 0 } },
+	{ "folke/which-key.nvim", opts = { delay = 0 } },
 }

@@ -46,29 +46,7 @@ local toggle_terminal = function()
 		if vim.bo[state.floating.buf].buftype ~= "terminal" then
 			vim.cmd.terminal()
 		end
-		vim.api.nvim_create_autocmd("WinLeave", {
-			callback = function()
-				if vim.api.nvim_win_is_valid(state.floating.win) then
-					vim.api.nvim_win_close(state.floating.win, true)
-				end
-			end,
-			once = true,
-		})
-		vim.api.nvim_create_autocmd("WinClosed", {
-			callback = function(args)
-				-- Delay a bit to ensure win info is updated
-				vim.schedule(function()
-					if not vim.api.nvim_buf_is_valid(state.floating.buf) then
-						return
-					end
-					local wins = vim.fn.getbufinfo(state.floating.buf)[1].windows
-					if #wins == 0 then
-						vim.api.nvim_buf_delete(state.floating.buf, { force = true })
-					end
-				end)
-			end,
-			desc = "Auto-delete buffer when last window closes",
-		})
+		vim.cmd("startinsert")
 	else
 		vim.api.nvim_win_hide(state.floating.win)
 	end
@@ -88,7 +66,9 @@ vim.api.nvim_create_user_command("Floaterminal", toggle_terminal, {})
 
 vim.keymap.set("n", "<leader><CR>", toggle_terminal, { desc = "Toggle Terminal" })
 vim.keymap.set("n", "q", function()
-	vim.api.nvim_win_hide(state.floating.win)
+	if state.floating.win ~= -1 then
+		vim.api.nvim_win_hide(state.floating.win)
+	end
 end, { desc = "Hide Terminal", buffer = state.floating.buf })
 
 return {}

@@ -1,7 +1,5 @@
 return {
 	{
-		"catppuccin/nvim",
-		name = "catppuccin",
-		opts = true,
+		"ellisonleao/gruvbox.nvim",
 	},
 }
