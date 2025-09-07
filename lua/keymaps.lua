@@ -23,3 +23,9 @@ km("n", "D", vim.diagnostic.open_float, { desc = "Show diagnostics" })
 km("n", "K", vim.lsp.buf.hover, { desc = "Show documentation" })
 km("n", "H", vim.lsp.buf.signature_help, { desc = "Show signature help" })
 km("i", "<C-k>", vim.lsp.buf.signature_help, { desc = "Show Signature help" })
+
+km("n", "<A-Up>", ":m .-2<CR>==", { noremap = true, silent = true })
+km("n", "<A-Down>", ":m .+1<CR>==", { noremap = true, silent = true })
+
+km("x", "<A-Down>", ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
+km("x", "<A-Up>", ":m '<-2<CR>gv=gv", { noremap = true, silent = true })

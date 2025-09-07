@@ -13,7 +13,7 @@ return {
 		"neovim/nvim-lspconfig",
 		config = function()
 			require("lspconfig")
-			local servers = { "basedpyright", "jdtls", "rust_analyzer", "lua_ls", "clangd", "html", "ts_ls" }
+			local servers = { "basedpyright", "jdtls", "rust_analyzer", "emmylua_ls", "clangd", "html", "ts_ls" }
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 			vim.lsp.enable(servers)
@@ -26,7 +26,7 @@ return {
 				filetypes = { "python" },
 			})
 			-- Lua
-			vim.lsp.config("lua_ls", {
+			vim.lsp.config("emmylua_ls", {
 				capabilities = capabilities,
 				filetypes = { "lua" },
 				workspace = {
