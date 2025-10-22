@@ -2,23 +2,25 @@
 
 ## Overview
 
-These are my personal Neovim config files, focused on simplicity, speed and practical workflows. Minimal startup time to get you into your editor, faster.
+These are my personal Neovim config files, focused on simplicity and speed.
 
 ## Features
 
-* Full-fledged LSP setup, easily install new LSP servers with :Mason
+* you better know how to install an LSP, LOL
 
-* Lazy loading to avoid slow startups
+* Lazy loading to avoid slow startups (~60ms)
 
-* Beautiful themes out of the box
+* ONE Beautiful Gruvbox dark theme OOTB
 
-* Modern UI
+* One of the simplest UIs you can imagine, just a statusbar, some pickers and your code.
+
+* It's a minimal config how many bullet points do you expect?
 
 ## Installation
 
 `git clone https://github.com/spelis/nvim.git ~/.config/nvim`
 
-Make sure you're on the latest neovim. Any issues that occur on earlier versions are your problem.
+Any issue that occurs is your problem.
 
 ## Usage
 
