@@ -25,7 +25,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup("plugins", { ui = {
 	border = "single",
-	pills = false,
+	pills = true,
 	title = "Lazy",
 } })
 
@@ -36,7 +36,7 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.cmdheight = 0 -- Hide command bar when unused.
 vim.opt.laststatus = 3 -- Global status.
-vim.opt.mouse = ""
+vim.opt.mouse = "a"
 vim.opt.cursorline = true
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4 -- >> and << size
@@ -59,16 +59,3 @@ if vim.g.neovide then
 	vim.g.neovide_floating_blur_amount_x = 8.0
 	vim.g.neovide_floating_blur_amount_y = 8.0
 end
-
-require("keymaps")
-
-vim.api.nvim_create_autocmd("VimEnter", {
-	once = true,
-	callback = function()
-		vim.schedule(function()
-			if vim.fn.argc() == 0 then -- Assume this means no file
-				vim.cmd("WhichKey <leader>")
-			end
-		end)
-	end,
-})

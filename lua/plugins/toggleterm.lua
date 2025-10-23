@@ -68,6 +68,7 @@ vim.keymap.set("n", "<leader><CR>", toggle_terminal, { desc = "Toggle Terminal" 
 vim.keymap.set("n", "q", function()
 	if state.floating.win ~= -1 then
 		vim.api.nvim_win_hide(state.floating.win)
+		state.floating.win = -1
 	end
 end, { desc = "Hide Terminal", buffer = state.floating.buf })
 
