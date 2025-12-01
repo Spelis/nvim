@@ -40,7 +40,7 @@ return {
 				desc = "Document Symbols",
 			},
 			{
-				"<leader>fS",
+				"<leader>fw",
 				function()
 					require("fzf-lua").lsp_workspace_symbols()
 				end,

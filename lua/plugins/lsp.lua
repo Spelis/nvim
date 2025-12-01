@@ -40,15 +40,10 @@ return {
 		"hrsh7th/nvim-cmp",
 		event = "InsertEnter",
 		dependencies = {
-			"onsails/lspkind.nvim",
 			"saadparwaiz1/cmp_luasnip",
-			"hrsh7th/cmp-path",
-			"chrisgrieser/cmp-nerdfont",
-			"hrsh7th/cmp-emoji",
 		},
 		config = function()
 			local cmp = require("cmp")
-			local lspkind = require("lspkind")
 			cmp.setup({
 				mapping = cmp.mapping.preset.insert({
 					["<C-e>"] = cmp.mapping.abort(),
@@ -57,32 +52,10 @@ return {
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
 					{ name = "path" },
-					{ name = "luasnip" },
-					{ name = "nerdfont" },
-					{ name = "emoji", option = { insert = false } },
 				}),
-				experimental = {
-					ghost_text = true, -- VSCode-like inline ghost text
-				},
-				formatting = {
-					fields = { "kind", "abbr" },
-					format = function(entry, vim_item)
-						local kind = lspkind.cmp_format({
-							mode = "symbol",
-							maxwidth = 50,
-						})(entry, vim_item)
-						local strings = vim.split(kind.kind, "%s", { trimempty = true })
-						local icon = strings[1] or ""
-						local text = strings[2] or ""
-						vim_item.kind = icon
-						vim_item.menu = "(" .. text .. ")"
-
-						return vim_item
-					end,
-				},
 				window = {
-					completion = cmp.config.window.bordered({ border = "single" }),
-					documentation = cmp.config.window.bordered({ border = "single" }),
+					completion = cmp.config.window.bordered({ border = "" }),
+					documentation = cmp.config.window.bordered({ border = "" }),
 				},
 				preselect = cmp.PreselectMode.Item,
 				completion = {
